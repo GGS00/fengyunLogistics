@@ -1,0 +1,32 @@
+{
+	"resultValue": [
+		{
+			"title": "货主",
+			"hidden": false
+		}, {
+			"title": "货品编码",
+			"hidden": false
+		} ,{
+			"title": "货品名称",
+			"hidden": false
+		}, {
+			"title": "供应商",
+			"hidden": false
+		}, {
+			"title": "货品分类",
+			"hidden": false
+		}, {
+			"title": "品牌",
+			"hidden": false
+		}, {
+			"title": "颜色",
+			"hidden": false
+		}, {
+			"title": "69码",
+			"hidden": false
+		}, {
+			"title": "条码类型",
+			"hidden": true
+		}
+	]
+}

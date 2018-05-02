@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="MainCtrl as mainCtrl">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../../COMMON/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<link href="../../../COMMON/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="../../css/inventory.css" rel="stylesheet">
+		<title page-title>库存查询</title>
+	</head>
+
+	<body>
+		<div class="modal fade" id="single_select_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width:70%;">
+				<div class="modal-content ">
+					<div class="modal-header common-title-bg">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      &times;
+                		</button>
+						<h4 class="modal-title" id="myModalLabel"> 条件查询  </h4>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="listLine">
+									<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">供应商：</span>
+										<input type="text" class="form-control" id="ivn_supplierName" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">货主：</span>
+										<input type="text" class="form-control" id="ivn_ownerName" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">货品编码：</span>
+										<input type="text" class="form-control" id="ivn_productCode" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								</div>
+								<div class="listLine">
+									<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">货品名称：</span>
+										<input type="text" class="form-control" id="ivn_productName" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">品牌：</span>
+										<input type="text" class="form-control" id="ivn_brand" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">入库单号：</span>
+										<input type="text" class="form-control" id="ivn_inboundCode" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								</div>
+								<div class="listLine">
+									<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">出库单号：</span>
+										<input type="text" class="form-control" id="ivn_outboundCode" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">库存状态：</span>
+										<select class="form-control" id="ivn_status" style="font-size: 12px; width: 160px;">
+											<option value="" selected="selected">-请选择-</option>
+											<option value="GOOD">良品</option>
+											<option value="BAD">不良品</option>
+											<option value="GOOGD_FROZEN">良品冻结</option>
+											<option value="BAD_FROZEN">不良品冻结</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">所在库位：</span>
+										<select class="form-control" id="ivn_locationName" style="font-size: 12px; width: 160px;">
+											<option value="" selected="selected">-请选择-</option>
+										</select>
+									</div>
+								</div>
+								</div>
+								<div class="listLine">
+									<div class="col-xs-4 col-sm-4">
+										<div class="input-group">
+											<span class="input-group-addon searchButton" style="width: 96px;">69码：</span>
+											<input type="text" class="form-control" id="ivn_barCode" style="font-size: 12px; width: 160px;">
+										</div>
+									</div>
+									<div class="col-xs-4 col-sm-4">
+										<div class="input-group">
+											<span class="input-group-addon searchButton" style="width: 96px;">BU分类：</span>
+											<select class="form-control" id="ivn_kindName" style="font-size: 12px; width: 160px;">
+												<option value="" selected="selected">-请选择-</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-xs-4 col-sm-4">
+										<div class="input-group">
+											<span class="input-group-addon searchButton" style="width: 96px;">库位类型：</span>
+											<select class="form-control" id="ivn_locationType" style="font-size: 12px; width: 160px;">
+												<option value="" selected="selected">-请选择-</option>
+												<option value="STORAGE">存货</option>
+												<option value="SHIP">发货</option>
+												<option value="RECEIVE">收货</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="listLine">
+									<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">库位code：</span>
+										<input type="text" class="form-control" id="ivn_locationCode" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">存货库龄-起：</span>
+										<input type="text" class="form-control" id="ivn_INVENTORY_AGE_BEGIN" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">存货库龄-止：</span>
+										<input type="text" class="form-control" id="ivn_INVENTORY_AGE_END" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								</div>
+								<div class="listLine">
+									<div id="datetimepicker" class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon id=" single_create_time " searchButton">存货日期-起：</span>
+										<input data-time-icon="icon-time" id="ivn_storageTimeStart" date-icon="icon-calendar" class="add-on form-control" data-format="yyyy-MM-dd" type="text" readonly style="cursor:pointer;width:95%"></input>
+									</div>
+								</div>
+								<div id="datetimepicker1" class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon id=" single_create_time " searchButton">存货日期-止：</span>
+										<input data-time-icon="icon-time" id="ivn_storageTimeEnd" date-icon="icon-calendar" class="add-on form-control" data-format="yyyy-MM-dd" type="text" readonly style="cursor:pointer;width:95%"></input>
+									</div>
+								</div>
+								</div>
+								
+							</div>
+							<div class='searchBtn'>
+								<button type="button" class="btn searchBtn btn-primary" ng-click='mainCtrl.searchInv()'>查询</button>
+								<button type="button" class="btn btn-default" ng-click="mainCtrl.resetIvn()">重置</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+						<!--<button type="button" class="btn btn-primary" onclick="submitcustom()">
+                    提交
+                </button>-->
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+		</div>
+		<!--
+        	修改预分配
+        -->
+        <div class="modal fade" id="modify_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width:50%;">
+				<div class="modal-content ">
+					<div class="modal-header common-title-bg">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      &times;
+                		</button>
+						<h4 class="modal-title" id="myModalLabel"> 修改预分配数量 </h4>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="change_inventoryId" name="change_inventoryId" value=""/>
+						<input type="hidden" id="change_warehouseCode" name="change_warehouseCode" value=""/>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="listLine">
+									<div class="col-xs-6 col-sm-6">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">库位编码：</span>
+										<input type="text" class="form-control" id="change_location_code" readonly style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">库位名称：</span>
+										<input type="text" class="form-control" id="change_location_name" readonly style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								</div>
+								<div class="listLine">
+									<div class="col-xs-6 col-sm-6">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">货品编码：</span>
+										<input type="text" class="form-control" id="change_product_code" readonly style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">货品名称：</span>
+										<input type="text" class="form-control" id="change_product_name" readonly style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								</div>
+								<div class="listLine">
+									<div class="col-xs-6 col-sm-6">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">拣货分配数量：</span>
+										<input type="text" class="form-control" id="change_allocated_quantity_BU" readonly style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6">
+									<div class="input-group">
+										<span class="input-group-addon searchButton" style="width: 96px;">预分配数量：</span>
+										<input type="text" class="form-control" id="preAQBU" style="font-size: 12px; width: 160px;">
+									</div>
+								</div>
+								</div>
+							</div>
+							<div class='searchBtn'>
+								<button type="button" class="btn searchBtn btn-primary" ng-click='mainCtrl.doChangePreAQBu()'>确定修改</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<!--<button type="button" class="btn btn-primary" onclick="submitcustom()">
+                    提交
+                </button>-->
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+		</div>
+		<!-- Main view  -->
+
+		<div class="ibox animated fadeInRight">
+			<div class="box-header">
+				<h3 class="box-title"><i class="fa fa-bar-chart-o"></i>&nbsp;库存查询</h3>
+			</div>
+			<div class="menuList animated fadeInRight">
+				<button type="button" class="btn btn-info top-button" data-toggle="modal" data-target="#single_select_dialog">条件查询</button>
+				<button type="button" class="btn btn-info top-button" ng-click="mainCtrl.openChangePreModal()">修改预分配</button>
+				<button type="button" class="btn btn-info top-button" ng-click="mainCtrl.goodsExport()">导出</button>
+				<div id="inventory_msg" class="msg"></div>
+			</div>
+			<!--<div class="showAll">
+				<button type="button" class="btn  btn-success" ng-click="mainCtrl.listShow == 15?mainCtrl.listShow=mainCtrl.tableLength-1:mainCtrl.listShow=15">显示全部</button>
+			</div>-->
+			<div class="ivnTableHeader">
+				<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+					<thead class="iboxHeader">
+						<tr>
+							<th style="width: 2%;"><input type="checkbox" id="checkAll" ng-model="mainCtrl.selectAll" ng-click="mainCtrl.all(mainCtrl.selectAll)" /></th>
+
+							<th ng-repeat="list in mainCtrl.tableList" ng-if="list.hidden == false" style="width:calc(100%/{{mainCtrl.trueLength}})" ng-bind-html="list.title">
+
+							</th>
+
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="ibox-content">
+
+				<div class="loadingMask">
+					<div class="loading">
+						<span class="loadingText">请稍后...</span>
+					</div>
+				</div>
+
+				<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+					<tbody>
+						<tr ng-repeat="list in mainCtrl.list" start-foo-table>
+							<td style="width: 2%;">
+								<input type="checkbox" ng-model="list.state" />
+							</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})" hidden="true">{{list.id}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.location.warehouseArea.warehouse.name}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.warehouse.name}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.location.code}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.location.name}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.productKey.product.owner.name}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.productKey.product.code}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.productKey.product.name}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.productKey.product.brand}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">
+								{{list.status!=undefined?(list.status =='GOOD'?'良品':(list.status =='BAD'?'不良品':list.status)):'-'}}
+							</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.productKey.product.supplier.name}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.packageLevel.unit}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.quantity}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.quantityBU}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">
+								<span style='color:#1bbbc5;'>
+								{{list.putawayQuantityBU}}
+								</span>
+							</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">
+								<span style='color:#17d648;'>
+								{{list.allocatedQuantityBU}}
+								</span>
+							</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">
+								<span style='color:red;'>
+								{{list.preAllocatedQuantityBU}}
+								</span>
+							</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.moveDocQuantityBU}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">
+								{{list.productKey.product.isIMEI!=undefined?(list.productKey.product.isIMEI ==true?'是':(list.productKey.product.isIMEI ==false?'否':list.productKey.product.isIMEI)):'-'}}
+							</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.productKey.lotInfo.inboundCode}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.productKey.lotInfo.storageTime}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.productKey.lotInfo.extendProp2}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.productKey.lotInfo.extendProp3}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.inventoryAge}}</td>
+							<td style="width:calc(100%/{{mainCtrl.trueLength}})">{{list.outboundCode}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="packPagination">
+				<uib-pagination class="pagination-prev-large" total-items="mainCtrl.pageCount" items-per-page="mainCtrl.pageSize" ng-change="mainCtrl.getList()" ng-model="mainCtrl.page" max-size="mainCtrl.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+				</uib-pagination>
+				<div class="selectNum">
+					<span class="refresh"><i class="fa fa-refresh" ng-click="mainCtrl.getList()"></i></span>
+					<select class="form-control" ng-model="mainCtrl.selected" ng-options="x.id as x.name for x in mainCtrl.pages" ng-change="mainCtrl.ivnChange(mainCtrl.selected)"></select>
+					<span class="selectText">条记录</span>
+					<span ng-if="mainCtrl.pageCount" style="position:absolute;top:30px;right:20px;">共{{mainCtrl.pageCount?mainCtrl.pageCount:'□'}}条</span>
+				</div>
+				
+			</div>
+		</div>
+		
+		<!-- 导出 -->
+<div id="ivn_export_searchDiv" style="display: none;">
+        <form id="ivn_export_searchForm" class="frmSearch" action="" autocomplete='off'>
+            <!--<input type="hidden" name="bean" value="wmsInventory"/>
+            <input type="hidden" name="method" value="page"/>-->
+            <input type="hidden" name="supplierName" value="{{mainCtrl.supplierName}}" id="supplierName"/>
+            <input type="hidden" name="ownerName" value="{{mainCtrl.ownerName}}" id="ownerName"/>
+            <input type="hidden" name="productCode" value="{{mainCtrl.productCode}}" id="productCode"/>
+            <input type="hidden" name="productName" value="{{mainCtrl.productName}}" id="productName"/>
+            <input type="hidden" name="brand" value="{{mainCtrl.brand}}" id="brand"/>
+            <input type="hidden" name="inboundCode" value="{{mainCtrl.inboundCode}}" id="inboundCode"/>
+            <input type="hidden" name="outboundCode" value="{{mainCtrl.outboundCode}}" id="outboundCode"/>
+            <input type="hidden" name="status" value="{{mainCtrl.status}}" id="status"/>
+            <input type="hidden" name="locationName" value="{{mainCtrl.locationName}}" id="locationName"/>
+            <input type="hidden" name="barCode" value="{{mainCtrl.barCode}}" id="barCode"/>
+            <input type="hidden" name="kindName" value="{{mainCtrl.kindName}}" id="kindName"/>
+            <input type="hidden" name="locationType" value="{{mainCtrl.locationType}}" id="locationType"/>
+            <input type="hidden" name="locationCode" value="{{mainCtrl.locationCode}}" id="locationCode"/>
+            <input type="hidden" name="INVENTORY_AGE_BEGIN" value="{{mainCtrl.INVENTORY_AGE_BEGIN}}" id="INVENTORY_AGE_BEGIN"/>
+            <input type="hidden" name="INVENTORY_AGE_END" value="{{mainCtrl.INVENTORY_AGE_END}}" id="INVENTORY_AGE_END"/>
+            <input type="hidden" name="storageTimeStart" value="{{mainCtrl.storageTimeStart}}" id="storageTimeStart"/>
+            <input type="hidden" name="storageTimeEnd" value="{{mainCtrl.storageTimeEnd}}" id="storageTimeEnd"/>
+        </form>
+</div>
+
+	</body>
+	<!-- jQuery and Bootstrap -->
+	<script src="../../../COMMON/js/jquery/jquery-2.1.1.min.js"></script>
+	<script src="../../../COMMON/js/bootstrap/bootstrap.min.js"></script>
+
+	<!-- Main Angular scripts-->
+	<script src="../../../COMMON/js/angular/angular.min.js"></script>
+	<script src="../../../COMMON/js/angular/angular-sanitize.min.js"></script>
+
+	<script src="../../../COMMON/js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
+	<script src="../../../COMMON/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+	<script src="../../../COMMON/js/app.js"></script>
+	<script src="../../js/config.js"></script>
+	<script src="../../js/controller/inventoryQuery.controller.js"></script>
+	<script src="../../js/service/inventoryQuery.service.js"></script>
+	<script src="../../js/print.js"></script>
+
+	<script type="text/javascript">
+		$.fn.datetimepicker.dates['zh'] = {
+			days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+			daysShort: ["日", "一", "二", "三", "四", "五", "六", "日"],
+			daysMin: ["日", "一", "二", "三", "四", "五", "六", "日"],
+			months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+			monthsShort: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"],
+			meridiem: ["上午", "下午"],
+			//suffix:      ["st", "nd", "rd", "th"],  
+			today: "今天"
+		};
+
+		$(function() {
+			$('#datetimepicker').datetimepicker({
+				language: 'zh',
+				autoclose: 'true'
+			});
+			$('#datetimepicker1').datetimepicker({
+				language: 'zh',
+				autoclose: 'true'
+			});
+		});
+	</script>
+
+</html>

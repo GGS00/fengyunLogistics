@@ -1,0 +1,35 @@
+{
+	"resultValue": [
+		 {
+			"title": "源货品编码",
+			"hidden": false
+		}, {
+			"title": "源货品id",
+			"hidden": true
+		}, {
+			"title": "源货品名称",
+			"hidden": false
+		}, {
+			"title": "移位数量",
+			"hidden": false
+		}, {
+			"title": "目标货品编码",
+			"hidden": false
+		}, {
+			"title": "目标货品id",
+			"hidden": true
+		}, {
+			"title": "目标货品名称",
+			"hidden": false
+		}, {
+			"title": "状态",
+			"hidden": false
+		}, {
+			"title": "库位",
+			"hidden": false
+		}, {
+			"title": "操作结果",
+			"hidden": false
+		}
+	]
+}

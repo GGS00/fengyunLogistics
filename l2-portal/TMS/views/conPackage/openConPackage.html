@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="MainCtrl as main">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title page-title>Con包拆包地</title>
+    <link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/openConPackage.css" rel="stylesheet">   
+</head>
+<style>
+
+</style>
+
+<!-- Main view  -->
+
+
+<div class="ibox animated fadeInRight">
+    <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-wrench"></i>&nbsp;系统指定拆包地点</h3>
+    </div>
+
+    <div class="packTableHeader">
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <thead class="iboxHeader">
+                <tr>
+                    <th style="width:25%">省份</th>
+                    <th style="width:25%">拆包站点</th>
+                    <th style="width:20%">创建人</th>
+                    <th style="width:20%">创建时间</th>
+                    <th style="width:10%"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ibox-content">
+
+        <div class="loadingMask">
+            <div class="loading" style="left: 47%;">
+                <!-- <span class="loadingText">请稍后...</span> -->
+                <img src="../../resource/img/load.gif">
+            </div>
+        </div>
+
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <tbody>
+                <tr ng-repeat="list in main.list" start-foo-table>
+
+                    <td style="width:25%">
+                        {{list.type}}
+                    </td>
+                    <td style="width:25%">
+                        {{list.type}}
+                    </td>
+                    <td style="width:20%">
+                        {{list.type}}
+                    </td>
+                    <td style="width:20%">
+                        {{list.type}}
+                    </td>
+                    <td style="width:10%">
+                        <button type="button" class="btn  btn-primary btn-sm" data-toggle="modal" data-target="#editConInfo">修改拆包点</button>
+                    </td>
+
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="packPagination">
+        <uib-pagination class="pagination-prev-large" total-items="main.pageCount" items-per-page="main.pageSize" ng-change="main.getList()" ng-model="main.page" max-size="main.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+        </uib-pagination>
+
+        <div class="selectNum">
+
+            <span class="refresh"><i class="fa fa-refresh" ng-click="main.getList()"></i></span>
+           <select class="form-control" ng-model="main.selected" ng-options="x.id as x.name for x in main.pages" ng-change="main.packChange(main.selected)"></select>
+            <span class="selectText">条记录</span>
+        </div>
+
+        <span ng-if="main.pageCount" style="position:absolute;top:30px;right:20px;">共{{main.pageCount?main.pageCount:'□'}}条</span>
+    </div>
+</div>
+
+<div class="modal fade" id="editConInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-pencil-square-o" style="margin-right: 10px;"></i>修改拆包点
+                </h4>
+              
+            </div>
+            <div class="modal-body">
+                <div class="input-group" style="width: 52%;margin-left: 23%;">
+                    <span class="input-group-addon searchButton" style="width: 96px;">省份</span>
+                    <select class="form-control" ng-model="main.siteSelected" ng-options="x.id as x.name for x in main.sites" ng-change="main.packChange(main.siteSelected)"></select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="imeisNoMsg"></div>
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="main.confrimAddCon()">
+                    确认修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- jQuery and Bootstrap -->
+<script src="../../../COMMON/js/jquery/jquery-2.1.1.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap.min.js"></script>
+
+<!-- Main Angular scripts-->
+<script src="../../../COMMON/js/angular/angular.min.js"></script>
+<script src="../../../COMMON/js/angular/angular-sanitize.min.js"></script>
+
+<script src="../../../COMMON/js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+<script src="../../../COMMON/js/app.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/controller/openConPackage.controller.js"></script>
+<script src="../../js/service/openConPackage.service.js"></script>
+<script src="../../../COMMON/js/LodopFuncs.js"></script>
+<script src="../../js/print.js"></script>
+
+<script type="text/javascript"> 
+	
+</script>
+	
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+angular.module('app')
+  .controller('MainCtrl', MainCtrl)
+
+angular.$inject = ['$http', '$stateParams'];
+
+function MainCtrl($scope, Area) {
+  var vm = this;
+  vm.pages = [
+        {name:'50',id:'50'},
+        {name:'20',id:'20'},
+        {name:'40',id:'40'},
+        {name:'80',id:'80'}
+    ];
+  vm.selected=vm.pages[0].id;//如果想要第一个值
+  vm.page = 1; //默认当前页数
+  vm.maxSize = 5; //最大页码
+  vm.pageSize = 50; //1页多少个
+  vm.pageCount = 100; //总个数
+  vm.list;
+  getList();
+
+  vm.getList = function() {
+    
+    getList();
+
+  }
+
+
+
+  function getList() {
+    vm.selectAll = false;
+
+    Area.getAreaList(vm).success(function(data) {
+
+      for (var i = 0; i < data.length; i++) {
+
+        data[i].state = false;
+
+      }
+
+      vm.list = data;
+      console.log(vm.list)
+
+    });
+
+  }
+
+  
+
+  vm.packChange = function(x){
+     console.log(x);
+     vm.pageSize = x;
+     console.log(vm.pageSize);
+     getList();
+  }
+
+  vm.refresh = function(){
+
+    getList();
+
+  }
+
+  vm.searchByOrderNum = function(){
+    vm.searchOrderNum = $("#searchOrderNum").val();
+    getList();
+
+  }
+}

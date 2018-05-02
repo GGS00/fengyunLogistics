@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="MainCtrl as main">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title page-title>Con包管理</title>
+    <link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/conPackage.css" rel="stylesheet">   
+</head>
+<style>
+
+</style>
+<div class="searchContent animated fadeInRight">
+    <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-search"></i>&nbsp;Con包管理</h3>
+            <i class="fa fa-minus minus" ng-click="main.showAndHide()"></i>
+    </div>
+    <div class="searchShow">
+
+        <div class="listLine">
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">装包地</span>
+                <input type="text" class="form-control" id="loadSite" style="font-size: 12px;">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">拆包地</span>
+                <input type="text" class="form-control" id="removeSite" style="font-size: 12px;">     
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">状态</span>
+                <input type="text" class="form-control" id="conStatus" style="font-size: 12px;">     
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">Con包号</span>
+                <input type="text" class="form-control" id="conPackageNum" style="font-size: 12px;">     
+            </div>        
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">Con包状态</span>
+                <input type="text" class="form-control" id="conPackageStatus" style="font-size: 12px;">     
+            </div>
+           
+        </div>
+
+        <button type="button" class="btn searchBtn btn-primary" ng-click="main.searchPack()">查询</button>
+        <!-- <button type="button" class="btn searchBtn btn-danger" ng-click="main.backToOld()" style="right:174px;">返回老页面</button> -->
+       <!--  <button type="button" class="btn searchBtn btn-primary" ng-click="main.searchPack()">查询</button> -->
+        <div id="checkAndPackage_msg" class="msg"></div>
+    </div>
+</div>
+
+<!-- Main view  -->
+
+
+<div class="ibox animated fadeInRight">
+    <!-- <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-bar-chart-o"></i>&nbsp;包装任务管理</h3>
+    </div> -->
+
+    <div class="menuList animated fadeInRight">
+        <button type="button" class="btn  btn-white" ng-click="main.newConPackage()">新建</button>
+        <button type="button" class="btn  btn-success"  ng-click="main.editConPackage()">修改</button>
+        <button type="button" class="btn  btn-white" ng-click="main.printConMa()">打印Con包条码</button>
+        <button type="button" class="btn  btn-success"  ng-click="main.loadGoods()">扫货装包</button>
+        <button type="button" class="btn  btn-white" ng-click="main.removeGoods()">移出装包</button>  
+        <button type="button" class="btn  btn-success"  ng-click="main.conPackageDetail()">Con包明细</button>
+    </div>
+
+    <div class="packTableHeader">
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <thead class="iboxHeader">
+                <tr>
+                    <th style="width: 2%;"><input type="checkbox" id="checkAll" ng-model="main.selectAll" ng-click="main.all(main.selectAll)"/></th>
+                    <th>装包站点</th>
+                    <th>Con包号</th>
+                    <th>状态</th>
+                    <th>创建人</th>
+                    <th>创建时间</th>
+                    <th>拆包地</th>
+                    <th>明细数量</th>
+                    <th>Con包状态</th>
+                    <th>Con包类型</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ibox-content firstLoad">
+
+        <div class="loadingMask">
+            <div class="loading" style="left: 47%;">
+                <!-- <span class="loadingText">请稍后...</span> -->
+                <img src="../../resource/img/load.gif">
+            </div>
+        </div>
+
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <tbody>
+                <tr ng-repeat="list in main.list" start-foo-table>
+                    <td style="width: 2%;">
+                        <input type="checkbox" ng-model="list.state"/>
+                    </td>
+
+                    <td style="width:">
+                        {{list.type}}
+                    </td>
+                    <td style="width:">
+                        {{list.type}}
+                    </td>
+                    <td style="width:">
+                        {{list.type}}
+                    </td>
+                    <td style="width:">
+                        {{list.type}}
+                    </td>
+                    <td style="width:">
+                        {{list.type}}
+                    </td>
+                    <td style="width:">
+                        {{list.type}}
+                    </td>
+                    <td style="width:">
+                        {{list.type}}
+                    </td>
+                    <td style="width:">
+                        {{list.type}}
+                    </td>
+                    <td style="width:">
+                        {{list.type}}
+                    </td>
+         
+
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="packPagination">
+        <uib-pagination class="pagination-prev-large" total-items="main.pageCount" items-per-page="main.pageSize" ng-change="main.getList()" ng-model="main.page" max-size="main.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+        </uib-pagination>
+
+        <div class="selectNum">
+
+            <span class="refresh"><i class="fa fa-refresh" ng-click="main.getList()"></i></span>
+           <select class="form-control" ng-model="main.selected" ng-options="x.id as x.name for x in main.pages" ng-change="main.packChange(main.selected)"></select>
+            <span class="selectText">条记录</span>
+        </div>
+
+        <span ng-if="main.pageCount" style="position:absolute;top:30px;right:20px;">共{{main.pageCount?main.pageCount:'□'}}条</span>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="goodsBackup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 270px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-pencil-square-o" style="margin-right: 10px;"></i>新建Con包
+                </h4>
+              
+            </div>
+            <div class="modal-body">
+                    <div class="input-group">
+                        <span class="input-group-addon searchButton">Con包数量</span>
+                        <input type="number" class="form-control" id="goodsCount">     
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <div class="imeisNoMsg"></div>
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="main.confrimAddCon()">
+                    确认添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="packageChange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 270px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel" ng-if="main.packageStyle == 0">
+                    <i class="fa fa-archive" style="margin-right: 10px;"></i>扫货装包
+                </h4>
+
+                <h4 class="modal-title" id="myModalLabel" ng-if="main.packageStyle == 1">
+                    <i class="fa fa-archive" style="margin-right: 10px;"></i>移出装包
+                </h4>
+              
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                     <span class="input-group-addon searchButton" style="width: 96px;">箱号</span>
+                    <input type="text" class="form-control" id="conPackageStatus" style="font-size: 12px;" placeholder="请输入箱号">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="imeisNoMsg"></div>
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-if="main.packageStyle == 0" ng-click="main.confrimLoad()">
+                    确认扫货
+                </button>
+                <button type="button" class="btn btn-primary" ng-if="main.packageStyle == 1" ng-click="main.confrimRemove()">
+                    确认移出
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="editConInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 224px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-pencil-square-o" style="margin-right: 10px;"></i>修改Con信息
+                </h4>
+              
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton" style="width: 96px;">装包地</span>
+                    <select class="form-control" ng-model="main.siteSelected" ng-options="x.name as x.name for x in main.sites"></select>
+                </div>
+                <div class="removeSiteInfo">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success showSite" ng-click="main.showSite()">指定站点</button>
+                        <button type="button" class="btn btn-default showProvince" ng-click="main.showProvince()">指定省</button>
+                    </div>
+                    <div class="input-group appointSite">
+                        <span class="input-group-addon searchButton" style="width: 96px;">指定站点</span>
+                        <select class="form-control" ng-model="main.siteSelected" ng-options="x.name as x.name for x in main.sites"></select>
+                    </div>
+
+                    <div class="appointProvince" style="display:none;">
+                        <div class="input-group">
+                            <span class="input-group-addon searchButton" style="width: 96px;">指定省</span>
+                            <select class="form-control" ng-model="main.siteSelected" ng-options="x.name as x.name for x in main.sites" ng-change="main.provinceChange(main.siteSelected)"></select>
+                        </div>
+
+                        <div class="input-group" style="margin-top: 16px;">
+                            <span class="input-group-addon searchButton" style="width: 96px;">指定站点</span>
+                            <select class="form-control" ng-model="main.siteSelected" ng-options="x.name as x.name for x in main.sites"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="imeisNoMsg"></div>
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="main.confrimAddCon()">
+                    确认修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="conPackageDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 70px;width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-pie-chart" style="margin-right: 10px;"></i>Con包明细
+                </h4>
+              
+            </div>
+            <div class="modal-body">
+
+
+                <div class="listLine">
+                    <div class="input-group">
+                        <span class="input-group-addon searchButton" style="width: 96px;">箱号</span>
+                        <input type="text" class="form-control" id="packageNum" style="font-size: 12px;">
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon searchButton" style="width: 96px;">面单号</span>
+                        <input type="text" class="form-control" id="miandan" style="font-size: 12px;">     
+                    </div>
+
+                    <button type="button" class="btn searchBtn btn-primary" style="margin-top: 12px;margin-left: 16px;width: 78px;" ng-click="main.searchConDetail()">查询</button>
+                   
+                </div>
+
+                <div class="ibox animated fadeInRight" style="box-shadow: none;margin-bottom: 0px;width: 100%;">
+
+
+                    <div class="packTableHeader">
+                        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                            <thead class="iboxHeader">
+                                <tr>
+                                    <!-- <th style="width: 2%;"><input type="checkbox" id="checkAll" ng-model="main.selectAll" ng-click="main.all(main.selectAll)"/></th> -->
+                                    <th>箱号</th>
+                                    <th>面单号</th>
+                                    <th>包装箱型</th>
+                                    <th>数量</th>
+                                    <th>描述</th>
+                                    <th>创建人员</th>
+                                    <th>创建时间</th>
+                                    <th>最后修改人</th>
+                                    <th>最后修改时间</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="ibox-content" style="height:400px">
+
+                        <div class="loadingMask">
+                            <div class="loading" style="left: 47%;">
+                                <!-- <span class="loadingText">请稍后...</span> -->
+                                <img src="../../resource/img/load.gif">
+                            </div>
+                        </div>
+
+                        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                            <tbody>
+                                <tr ng-repeat="list in main.detailList" start-foo-table>
+                                    <!-- <td style="width: 2%;">
+                                        <input type="checkbox" ng-model="list.state"/>
+                                    </td> -->
+
+                                    <td style="width:">
+                                        {{list.type}}
+                                    </td>
+                                    <td style="width:">
+                                        {{list.type}}
+                                    </td>
+                                    <td style="width:">
+                                        {{list.type}}
+                                    </td>
+                                    <td style="width:">
+                                        {{list.type}}
+                                    </td>
+                                    <td style="width:">
+                                        {{list.type}}
+                                    </td>
+                                    <td style="width:">
+                                        {{list.type}}
+                                    </td>
+                                    <td style="width:">
+                                        {{list.type}}
+                                    </td>
+                                    <td style="width:">
+                                        {{list.type}}
+                                    </td>
+                                    <td style="width:">
+                                        {{list.type}}
+                                    </td>
+                         
+
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="packPagination">
+                        <uib-pagination class="pagination-prev-large" total-items="main.detailPageCount" items-per-page="main.detailPageSize" ng-change="main.getDetail()" ng-model="main.detailPage" max-size="main.detailMaxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+                        </uib-pagination>
+
+                        <div class="selectNum">
+
+                            <span class="refresh"><i class="fa fa-refresh" ng-click="main.getDetail()"></i></span>
+                           <select class="form-control" ng-model="main.detailSelected" ng-options="x.id as x.name for x in main.detailPages" ng-change="main.detailPackChange(main.detailSelected)"></select>
+                            <span class="selectText">条记录</span>
+                        </div>
+
+                        <span ng-if="main.detailPageCount" style="position:absolute;top:30px;right:20px;">共{{main.pageCount?main.pageCount:'□'}}条</span>
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="modal-footer" style="padding-top: 0;">
+                <div class="imeisNoMsg"></div>
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <!-- <button type="button" class="btn btn-primary" ng-click="main.confrimAddCon()">
+                    确认修改
+                </button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- jQuery and Bootstrap -->
+<script src="../../../COMMON/js/jquery/jquery-2.1.1.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap.min.js"></script>
+
+<!-- Main Angular scripts-->
+<script src="../../../COMMON/js/angular/angular.min.js"></script>
+<script src="../../../COMMON/js/angular/angular-sanitize.min.js"></script>
+
+<script src="../../../COMMON/js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+<script src="../../../COMMON/js/app.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/controller/conPackage.controller.js"></script>
+<script src="../../js/service/conPackage.service.js"></script>
+<script src="../../../COMMON/js/LodopFuncs.js"></script>
+<script src="../../js/print.js"></script>
+
+<script type="text/javascript"> 
+	
+</script>
+	
+
+</body>
+</html>

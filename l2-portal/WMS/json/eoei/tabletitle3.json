@@ -1,0 +1,32 @@
+{
+	"resultValue": [
+		{
+			"title": "库存id",
+			"hidden": true
+		}, {
+			"title": "货品id",
+			"hidden": true
+		} ,{
+			"title": "货品编码",
+			"hidden": false
+		}, {
+			"title": "货品名称",
+			"hidden": false
+		}, {
+			"title": "总数量",
+			"hidden": false
+		}, {
+			"title": "预分配",
+			"hidden": false
+		}, {
+			"title": "库位",
+			"hidden": false
+		}, {
+			"title": "供应商",
+			"hidden": false
+		}, {
+			"title": "库存状态",
+			"hidden": false
+		}
+	]
+}

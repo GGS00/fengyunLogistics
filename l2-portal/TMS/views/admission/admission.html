@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="MainCtrl as main">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title page-title>入场装车</title>
+    <link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/animate.css" rel="stylesheet">
+    <link href="../../../COMMON/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/admission.css" rel="stylesheet">
+</head>
+<style>
+
+</style>
+<div class="searchContent animated fadeInRight">
+    <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-search"></i>&nbsp;入场、装车统计</h3>
+    </div>
+    <div class="searchShow">
+        
+        <div class="listLine">
+           <div id="datetimepicker" class="input-group">
+                <span class="input-group-addon searchButton">查询日期-起</span>
+                <input  data-time-icon="icon-time" id="startTaskTime" data-date-icon="icon-calendar" class="add-on form-control" data-format="yyyy-MM-dd" type="text" readonly style="cursor:pointer;width:90%"></input>
+            </div>
+
+            <div id="datetimepicker1" class="input-group" style="margin-left:0">
+                <span class="input-group-addon searchButton">查询日期-止</span>
+                <input  data-time-icon="icon-time" id="endTaskTime" data-date-icon="icon-calendar" class="add-on form-control" data-format="yyyy-MM-dd" type="text" readonly style="cursor:pointer;width:90%"></input>
+            </div>
+
+            <button type="button" class="btn searchBtn btn-primary " ng-click="main.getList()">查询</button>
+        </div>
+        <div id="container"></div>
+
+  
+    </div>
+    <div id="checkAndPackage_msg" class="msg"></div>
+</div>
+
+<!-- Main view  -->
+
+
+<div class="ibox animated fadeInRight">
+<!--     <div class="box-header">
+        <h3 class="box-title"><i class="fa fa-bar-chart-o"></i>&nbsp;入场、装车统计</h3>
+</div> -->
+    
+    <div class="packTableHeader">
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <thead class="iboxHeader">
+                <tr>
+                    <!-- <th style="width:5%"><input type="checkbox" id="checkAll" ng-model="main.selectAll" ng-click="main.all(main.selectAll)"/></th> -->
+                    <th style="width:15%">
+                        操作人（昵称）
+                    </th>
+
+                    <th style="width:10%">
+                        总箱数 
+                    </th>
+
+                    <th style="width:20%">
+                        入场箱数
+                    </th>
+
+                    <th style="width:10%">
+                        装车箱数
+                    </th>
+
+                    <th style="width:20%">
+                        订单数
+                    </th>
+                    
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ibox-content">
+
+        <div class="loadingMask">
+            <div class="loading" style="width: 90px;left: 45%;">
+                <!-- <span class="loadingText">请稍后...</span> -->
+                <img src="../../resource/img/load.gif">
+            </div>
+        </div>
+
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <tbody>
+                <tr ng-repeat="list in main.list" start-foo-table>
+                    <!-- <td style="width:5%">
+                        <input type="checkbox" ng-model="list.state"/>
+                    </td> -->
+                    <!-- <td  ng-repeat="(key,value) in list track by $index"  ng-show="$index < main.listShow" ng-if=" key != 'state'" style="width:calc(100%/{{main.tableLength}})">
+                        {{value}}
+                    </td> -->
+                    <td style="width:15%">
+                        {{list.name}}
+                    </td>
+                    <td style="width:10%">
+                        {{list.TOTAL_COUNT}}
+                    </td>
+                    <td style="width:20%">
+                        {{list.ENTERED_COUNT}}
+                    </td>
+                    <td style="width:10%">
+                        {{list.TRUCK_COUNT}}
+                    </td>
+                    <td style="width:20%">
+                        {{list.ORDER_COUNT}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   <!--  <div class="packPagination">
+       <uib-pagination class="pagination-prev-large" total-items="main.pageCount" items-per-page="main.pageSize" ng-change="main.getList()" ng-model="main.page" max-size="main.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+       </uib-pagination>
+       <div class="selectNum">
+           <span class="refresh"><i class="fa fa-refresh" ng-click="main.getList()"></i></span>
+          <select class="form-control" ng-model="main.selected" ng-options="x.id as x.name for x in main.pages" ng-change="main.packChange(main.selected)"></select>
+           <span class="selectText">条记录</span>
+       </div>
+   </div> -->
+</div>
+
+
+
+<!-- jQuery and Bootstrap -->
+<script src="../../../COMMON/js/jquery/jquery-2.1.1.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap.min.js"></script>
+
+
+<!-- Main Angular scripts-->
+<script src="../../../COMMON/js/angular/angular.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+<script src="../../../COMMON/js/highcharts.js"></script>
+<script src="../../../COMMON/js/app.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/controller/admission.controller.js"></script>
+<script src="../../js/service/admission.service.js"></script>
+
+<script type="text/javascript">
+       /* $(document).keydown(function(event){
+            if(event.keyCode == '13'){
+                $("#xxx").click();
+                   
+            }
+        }); */
+
+     $.fn.datetimepicker.dates['zh'] = {  
+                days:       ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六","星期日"],  
+                daysShort:  ["日", "一", "二", "三", "四", "五", "六","日"],  
+                daysMin:    ["日", "一", "二", "三", "四", "五", "六","日"],  
+                months:     ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月","十二月"],  
+                monthsShort:  ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"],  
+                meridiem:    ["上午", "下午"],  
+                //suffix:      ["st", "nd", "rd", "th"],  
+                today:       "今天"  
+     };  
+
+     $(function() {
+        $('#datetimepicker').datetimepicker({
+          language: 'zh',
+          autoclose: true
+        });
+         $('#datetimepicker1').datetimepicker({
+          language: 'zh',
+          autoclose:'true'
+        });
+    }); 
+    
+</script>
+    
+
+</body>
+</html>

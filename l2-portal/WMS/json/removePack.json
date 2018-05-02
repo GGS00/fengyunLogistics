@@ -1,0 +1,10 @@
+{
+    "additionalMsg": {
+        "message": "",
+        "failCount": 0,
+        "totalCount": 2,
+        "status": "失败",
+        "processTime": 0.606,
+        "successCount": 2
+    }
+}

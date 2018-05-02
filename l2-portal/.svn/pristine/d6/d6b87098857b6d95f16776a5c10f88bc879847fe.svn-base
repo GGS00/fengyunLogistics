@@ -1,0 +1,70 @@
+{
+    "total": 6,
+    "rows": [
+        {
+            "id": 2004138,
+            "weight": 1,
+            "volume": 0.01,
+            "lineNo": 6,
+            "packageBoxNo": "PN161128000006",
+            "packageTask": {
+                "id": 2002093
+            }
+        },
+        {
+            "id": 2004137,
+            "weight": 1,
+            "volume": 0.01,
+            "lineNo": 5,
+            "packageBoxNo": "PN161128000005",
+            "packageTask": {
+                "id": 2002093
+            }
+        },
+        {
+            "id": 2004136,
+            "weight": 1,
+            "volume": 0.01,
+            "lineNo": 4,
+            "packageBoxNo": "PN161128000004",
+            "packageTask": {
+                "id": 2002093
+            }
+        },
+        {
+            "id": 2004135,
+            "weight": 1,
+            "volume": 0.01,
+            "lineNo": 3,
+            "packageBoxNo": "PN161128000003",
+            "packageTask": {
+                "id": 2002093
+            }
+        },
+        {
+            "id": 2004134,
+            "weight": 1,
+            "volume": 0.01,
+            "lineNo": 2,
+            "packageBoxNo": "PN161128000002",
+            "packageTask": {
+                "id": 2002093
+            }
+        },
+        {
+            "id": 2004133,
+            "weight": 1,
+            "volume": 0.01,
+            "lineNo": 1,
+            "packageBoxNo": "PN161128000001",
+            "packageTask": {
+                "id": 2002093
+            }
+        }
+    ],
+    "additionalMsg": {
+        "message": "",
+        "status": "成功",
+        "processTime": 0.158
+    }
+}

@@ -1,0 +1,32 @@
+angular
+	.module('app')
+    .factory('Area', Area)
+
+function Area($http){
+	return {
+		getAreaList:getAreaList
+
+	}
+	function getAreaList(vm){
+		return $http({url: '../../json/pack.json',method: "get",
+						params:{
+	                            page:vm.page,
+								rows:vm.pageSize
+							
+							}
+						});
+	}
+
+
+
+
+
+	
+	
+}
+
+
+
+
+
+

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="MainCtrl as main">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title page-title>干线线路规划</title>
+    <link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/animate.css" rel="stylesheet">
+    <link href="../../../COMMON/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/trunkLine.css" rel="stylesheet">
+</head>
+<style>
+
+</style>
+<div class="searchContent animated fadeInRight">
+    <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-search"></i>&nbsp;干线线路规划</h3>
+    </div>
+    <div class="searchShow">
+        <div class="input-group">
+            <span class="input-group-addon searchButton">编码</span>
+            <input id="bcode" type="text" class="form-control">
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon searchButton">始发平台</span>
+            <input id="stsitenm" type="text" class="form-control">     
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon searchButton">途径站点</span>
+            <input id = "pssitenm" type="text" class="form-control">     
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon searchButton">目标站点</span>
+            <input id = "edsitenm" type="text" class="form-control">     
+        </div>
+
+        <div class="btnGroup">
+
+            <button type="button" class="btn searchBtn btn-primary " ng-click="main.getList()">查询</button>
+
+            <button type="button" class="btn  btn-danger" ng-click="main.showAddLine()">新增干线</button>
+            
+        </div>
+    </div>
+    <div id="checkAndPackage_msg" class="msg"></div>
+</div>
+
+<!-- Main view  -->
+
+
+<div class="ibox animated fadeInRight">
+    <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-bar-chart-o"></i>&nbsp;干线线路规划</h3>
+    </div>
+    
+    <div class="packTableHeader">
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <thead class="iboxHeader">
+                <tr>
+                    <!-- <th style="width:5%"><input type="checkbox" id="checkAll" ng-model="main.selectAll" ng-click="main.all(main.selectAll)"/></th> -->
+                    <th style="width:15%">
+                        编码
+                    </th>
+
+                    <th style="width:10%">
+                        始发平台
+                    </th>
+
+                    <th style="width:20%">
+                        途径站点
+                    </th>
+
+                    <th style="width:10%">
+                        目标站点
+                    </th>
+
+                    <th style="width:20%">
+                        创建人
+                    </th>
+
+                    <th style="width:10%">
+                        
+                    </th>
+                    
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ibox-content">
+
+        <div class="loadingMask">
+            <div class="loading" style="width: 90px;left: 45%;">
+                <!-- <span class="loadingText">请稍后...</span> -->
+                <img src="../../resource/img/load.gif">
+            </div>
+        </div>
+
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <tbody>
+                <tr ng-repeat="list in main.list" start-foo-table>
+                    <!-- <td style="width:5%">
+                        <input type="checkbox" ng-model="list.state"/>
+                    </td> -->
+                    <!-- <td  ng-repeat="(key,value) in list track by $index"  ng-show="$index < main.listShow" ng-if=" key != 'state'" style="width:calc(100%/{{main.tableLength}})">
+                        {{value}}
+                    </td> -->
+                    <td style="width:15%">
+                        {{list.lineName}}
+                    </td>
+                    <td style="width:10%">
+                        {{list.startPlatformName}}
+                    </td>
+                    <td style="width:20%">
+                        {{list.roadPlatformNames}}
+                    </td>
+                    <td style="width:10%">
+                        {{list.endPlatformName}}
+                    </td>
+                    <td style="width:20%">
+                        {{list.creator}}
+                    </td>
+
+                    <td style="width:10%">
+                          <button type="button" class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#deleteConfirm">删除</button>
+                        <!-- <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn btn-primary btn-sm">
+                                操作
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a ng-click="main.showEditLine()">修改线路信息</a></li>
+                                <li><a data-toggle="modal" data-target="#deleteConfirm">删除</a></li>
+                            </ul>
+                        </div> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="packPagination">
+        <uib-pagination class="pagination-prev-large" total-items="main.pageCount" items-per-page="main.pageSize" ng-change="main.getList()" ng-model="main.page" max-size="main.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+        </uib-pagination>
+        <div class="selectNum">
+            <span class="refresh"><i class="fa fa-refresh" ng-click="main.getList()"></i></span>
+           <select class="form-control" ng-model="main.selected" ng-options="x.id as x.name for x in main.pages" ng-change="main.packChange(main.selected)"></select>
+            <span class="selectText">条记录</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addLine" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    新增线路
+                </h4>
+            </div>
+            <div class="modal-body">
+               <div class="infoFill">
+                <div class="siteSelected">
+                    <div class="input-group">
+                        <span class="input-group-addon">始发平台</span>
+                        <input id ="startsite" type="text" class="form-control" ng-keyup="main.searchByKey()" ng-model="main.lineStartSelected">
+                        <ul class="selectControl" style="display:none">
+                            <li ng-repeat="list in main.lineSiteList" ng-click="main.selectSite(list.id,list.name)">{{list.name}}</li>
+                        </ul>
+                        <!-- <select class="form-control" ng-model="main.lineStartSelected" ng-options="x.title as x.title for x in main.lineSiteList"></select> -->
+                    </div>
+
+                    <div class="input-group" style="margin-left:4%">
+                        <span class="input-group-addon">目标站点</span>
+
+                        <input id ="endsite" type="text" class="form-control" ng-keyup="main.searchByEndKey()" ng-model="main.lineEndSelected">
+                        <ul class="selectEndControl" style="display:none">
+                            <li ng-repeat="list in main.lineSiteList" ng-click="main.selectEndSite(list.id,list.name)">{{list.name}}</li>
+                        </ul>
+                        <!-- <select class="form-control" ng-model="main.lineEndSelected" ng-options="x.title as x.title for x in main.lineSiteList"></select> -->
+                    </div>
+                </div>   
+                <div class="lineDes">
+                    <textarea class="lineText" placeholder="请填写改新增线路的描述信息 (150字以内)" maxlength="150"></textarea>
+                </div>
+
+                <div class="passByTable">
+                    <table class="footable table table-stripped toggle-arrow-tiny passByCheck" data-page-size="15">
+                         <thead class="iboxHeader">
+                            <tr>
+                                <!-- <th style="width:5%"><input type="checkbox" id="checkAll" ng-model="main.selectAll" ng-click="main.all(main.selectAll)"/></th> -->
+
+                                <th style="width:25%">
+                                    优先级
+                                </th>
+
+                                <th style="width:70%">
+                                    途经点
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  class="animated fadeInRight" ng-repeat="list in main.passList" start-foo-table>
+                                <!-- <td style="width:5%">
+                                    <input type="checkbox" ng-model="list.state"/>
+                                </td> -->
+                                <td style="width:25%">
+                                    {{$index+1}}
+                                </td>
+                                <td style="width:70%">
+                                    {{list}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="resetCheck">
+                         <button type="button" class="btn  btn-danger" ng-click="main.resetPassBy()">重置</button>
+                    </div>
+
+                    <div class="linePic animated fadeInLeft">
+                        <div class="linePoint">
+                            <div class="sitePic">
+                                <span class="siteName" style="top:2px;left:8px;font-size:22px;">始</span>
+                            </div>
+                            <span class="stepName">
+                              {{main.lineStartSelected}}
+                            </span>
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+                        <div class="linePoint animated fadeInLeft" ng-repeat="list in main.passList">
+                            <div class="sitePic">
+                                <span ng-if="$index < 9" class="siteName">{{$index+1}}</span>
+                                <span ng-if="$index >= 9" class="siteName" style="left:5px">{{$index+1}}</span>
+                            </div>
+                            <span class="stepName">
+                              {{list}}
+                            </span>
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+                        <div class="linePoint">
+                            <div class="sitePic">
+                                <span class="siteName" style="top:2px;left:8px;font-size:22px;">终</span>
+                            </div>
+                            <span class="stepName">
+                              {{main.lineEndSelected}}
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                               
+                </div>
+
+                <div class="addLineBtn">
+                    <button type="button" class="btn  btn-success" ng-click="main.showPassBy()">选择途经点</button>
+                </div>
+
+                <div class="passSite">
+
+                    <div class="input-group siteSelected">
+                        <span class="input-group-addon searchButton">途径站点</span>
+                        
+                        <input id ="passsite" type="text" class="form-control" ng-keyup="main.searchByPassKey()" ng-model="main.passbyselected">
+                        <ul class="selectPassControl" style="display:none">
+                            <li ng-repeat="list in main.lineSiteList" ng-click="main.selectPassSite(list.id,list.name)">{{list.name}}</li>
+                        </ul>
+                        <!-- <select class="form-control" ng-model="main.passbyselected" ng-options="x.title as x.title for x in main.passByList"></select> -->
+                    </div>
+
+                    <div class="addToLine">
+                       <button type="button" class="btn  btn-success" ng-click="main.addPassBy()">添加</button>
+                    </div>
+                </div>
+
+               </div>
+                
+                
+            </div>
+            <div class="modal-footer">
+                <div class="imeisNoMsg"></div>
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="main.submitLine()">
+                    提交
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+<div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    确认删除
+                </h4>
+            </div>
+            <div class="modal-body">
+               
+                删除之后不可复原,需要自己手动重新添加,确定删除吗？
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="main.submitLine()">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+<!-- jQuery and Bootstrap -->
+<script src="../../../COMMON/js/jquery/jquery-2.1.1.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap.min.js"></script>
+
+
+<!-- Main Angular scripts-->
+<script src="../../../COMMON/js/angular/angular.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="../../../COMMON/js/app.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/controller/trunkLine.controller.js"></script>
+<script src="../../js/service/trunkLine.service.js"></script>
+
+<script type="text/javascript">
+   /* $(document).keydown(function(event){
+        if(event.keyCode == '13'){
+            $("#xxx").click();
+               
+        }
+    }); */
+    
+</script>
+    
+
+</body>
+</html>

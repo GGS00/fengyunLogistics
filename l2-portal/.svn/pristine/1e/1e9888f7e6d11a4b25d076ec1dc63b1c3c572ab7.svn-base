@@ -1,0 +1,9 @@
+{
+    "checkStatus": "PART_CHECK",
+    "checkedQuantityBU": 3,
+    "additionalMsg": {
+        "message": "",
+        "status": "成功",
+        "processTime": 0.052
+    }
+}

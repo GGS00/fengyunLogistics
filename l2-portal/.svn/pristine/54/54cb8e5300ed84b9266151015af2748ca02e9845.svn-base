@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="ReviewCtrl as review">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title page-title>复核打包</title>
+    <link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../../../COMMON/css/animate.css" rel="stylesheet">
+    <link href="../../css/outBound.css" rel="stylesheet">   
+</head>
+<style>
+
+</style>
+
+<div class="reviewContent animated fadeInRight">
+  <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-search"></i>&nbsp;复核打包</h3>
+            <i class="fa fa-minus minus" ng-click="review.showAndHide()"></i>
+  </div>
+ <div class="showRearch">
+  <div class="reviewSearch">
+    <div class="input-group">
+        <span class="input-group-addon searchButton">查询条件 (F1)</span>
+        <input type="text" class="form-control" id="numberCode"  style="width: 265px;" placeholder="输入周转箱号，串号，订单号，运单号">
+    </div>
+    <div class="reviewOperation">
+        <button type="button" class="btn  btn-success searchOperation" ng-click="review.searchByNumbers()">查询</button>
+        <button type="button" class="btn  btn-success endPackage" id="endPackage" ng-click="review.overPackage()">结束包装(+)</button>
+        <button type="button" class="btn  btn-success printList"  id="printList" ng-click="review.printList()">打印清单(F6)</button>
+        <button type="button" class="btn  btn-success printWay" id="printWay"ng-click="review.printWaybill()">打印运单(F8)</button>
+        <div class="ifprint">
+            <span>是否打印串码明细?</span>
+            <input type="checkbox" id="ifPrintSerialNo" name="ifPrintSerialNo" checked="`">
+        </div>
+    </div>
+     <button type="button" class="btn  btn-success allListShow"ng-click="review.allListShow()">全部</button>
+     <button type="button" class="btn  btn-success backToPack"ng-click="review.backToPack()">返回</button>
+  </div>
+  <div class="reviewShow">
+    <input type="hidden" id="checkAndPackage_status" value="{{review.baozhuangstatus}}"/>
+    <input type="hidden" id="checkAndPackage_cc_packageTaskId" value="{{review.packageTaskId}}"/>
+    <input type="hidden" id="barcodeId" value="{{review.miandan}}"/>
+    <input type="hidden" id="checkAndPackage_cw_outBoundId" value="{{review.outboundId}}"/>
+    <div class="listLine">
+        <div class="input-group">
+            <span class="input-group-addon searchButton"><i class="fa  fa-star redColor"></i>&nbsp;计划数量</span>
+            <input type="text" class="form-control " value="{{review.jihuashu}}"  readonly="readonly">     
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon searchButton "><i class="fa  fa-star redColor"></i>&nbsp;拣货数量</span>
+            <input type="text" class="form-control " value="{{review.jianhuoshu}}" readonly="readonly">    
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon searchButton "><i class="fa  fa-star redColor"></i>&nbsp;计划复核数量</span>
+            <input type="text" class="form-control " value="{{review.jihuafuhe}}" value="{{review.fahuo}}" readonly="readonly">     
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon searchButton "><i class="fa  fa-star redColor"></i>&nbsp;复核数量</span>
+            <input type="text" class="form-control " value="{{review.fuheshu}}" readonly="readonly">    
+        </div>
+    </div>
+    <div class="moreListShow" style="display:none">
+        <div class="listLine">
+            <div class="input-group">
+                <span class="input-group-addon searchButton">发货单号</span>
+                <input type="text" class="form-control"  value="{{review.fahuo}}" readonly="readonly" style="font-size: 12px;">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton">包装任务号</span>
+                <input type="text" class="form-control" value="{{review.baozhuang}}" readonly="readonly" style="font-size: 12px;">    
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton">物流公司</span>
+                <input type="text" class="form-control" value="{{review.wuliu}}" readonly="readonly">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton">面单号</span>
+                <input type="text" class="form-control" value="{{review.miandan}}" readonly="readonly" style="font-size: 12px;">  
+            </div>
+        </div>
+
+        <div class="listLine">
+            <div class="input-group">
+                <span class="input-group-addon searchButton">单据类型</span>
+                <input type="text" class="form-control" value="{{review.danju}}" readonly="readonly">   
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton">已包装箱数</span>
+                <input type="text" class="form-control" value="{{review.zhuangxiang}}" readonly="readonly">   
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton">包裹总计重量(kg)</span>
+                <input type="text" class="form-control" value="{{review.zhongliang}}" readonly="readonly">   
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton">体积(m<sup>3</sup>)</span>
+                <input type="text" class="form-control" value="{{review.tiji}}" readonly="readonly">    
+            </div>
+        </div>
+
+        
+        <div class="listLine">
+            <div class="input-group">
+                <span class="input-group-addon searchButton">项目</span>
+                <input type="text" class="form-control"value="{{review.xiangmu}}"  readonly="readonly">     
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton">复核状态</span>
+                <input type="text" class="form-control" value="{{review.fuhezhuang!=undefined?(review.fuhezhuang == 'NON_CHECK'?'无需复核':(review.fuhezhuang == 'UN_CHECK'?'未复核':(review.fuhezhuang == 'PART_CHECK'?'部分复核':(review.fuhezhuang == 'CHECKED'?'已复核':review.fuhezhuang)))):'-'}}" readonly="readonly">     
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton">发运状态</span>
+                <input type="text" class="form-control" value="{{review.fayunzhuang!=undefined?(review.fayunzhuang=='UN_SHIP'?'待发运':(review.fayunzhuang=='PART_SHIPPED'?'部分发运':(review.fayunzhuang=='SHIPPED'?'已发运':review.fayunzhuang))):'-'}}" readonly="readonly">     
+            </div>
+        </div>
+    </div>
+    <!-- <div class="input-group">
+        <span class="input-group-addon searchButton">打印次数</span>
+        <input type="text" class="form-control" value="{{review.dayincishu}}" readonly="readonly">     
+    </div>
+    
+    <div class="input-group">
+        <span class="input-group-addon searchButton">打印时间</span>
+        <input type="text" class="form-control" value="{{review.dayinshijian}}" readonly="readonly">
+    </div>
+     -->
+<!--     <button type="button" class="btn searchBtn btn-primary">更换物流</button> -->
+    <div id="checkAndPackage_msg" class="msg"></div>
+  </div>
+ </div>
+</div>
+
+<!-- 出库明细 -->
+<div id="wmsOutboundItem_scan_srchDiv" style="display: none;">
+        <form id="wmsOutboundItem_scan_srchForm" class="frmSearch" action="" autocomplete='off'>
+            <input type="hidden" name="bean" value="wmsOutboundItem"/>
+            <input type="hidden" name="method" value="page"/>
+            <input type="hidden" name="outboundId" value="{{review.outboundId}}" id="outboundId"/>
+        </form>
+</div>
+
+
+<!-- Main view  -->
+<div class="mainBox animated fadeInRight">
+    <div class="main-box">
+        <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-bar-chart-o"></i>&nbsp;发货单明细</h3>
+        </div>
+        <div class="ibox-content">
+
+          <div class="input-group"> 
+               <textarea class="form-control" id="examination" style="width: 200px;resize:none;height: 35px;"></textarea> 
+               <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat" ng-click="review.examinationCheck()">复核(F9)
+                </button>
+
+                <button type="button" class="btn  btn-success export" ng-click="review.exportCode()">导出</button>
+
+               </span>
+               <audio src="../../resource/music/errorslow.wav" id="audioPlay" style="display:none"></audio>
+          </div>
+
+          <div class="voice">
+            <i class="fa  fa-volume-down"></i>
+          </div>
+          <div class="reviewTableHeader">
+            <table class="footable table table-stripped toggle-arrow-tiny reviewCheck" data-page-size="15">
+                <thead>
+                    <tr>
+                        <th style="width:2%"><input type="checkbox" id="checkAll" ng-model="review.selectAll" ng-click="review.all(review.selectAll)"/></th>
+                        <th style="width:8%">序号</th>
+                        <th style="width:20%;">货品编码</th>
+                        <th style="width:18%">货品名称</th>
+                        <!-- <th>效期管理</th>
+                        <th>条码类型</th> -->
+                        <th>国标码</th>
+                        <th>计划数量</th>
+                        
+                        <th>货品状态</th>
+                        <th>串码管理</th>
+                        <!-- <th>串码长度</th> -->
+                        <th style="width: 20%">串码</th>
+                        
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="reviewTableContent">
+
+            <div class="loadingMask">
+                <div class="loading" style="width: 78px;left: 44%;">
+                    <!-- <span class="loadingText">请稍后...</span> -->
+                    <img src="../../resource/img/load.gif">
+                </div>
+            </div>
+            <table class="footable table table-stripped toggle-arrow-tiny reviewCheck" data-page-size="15">
+
+                <tbody>
+                    <tr ng-repeat="list in review.list" start-foo-table>
+                        <td style="width:2%">
+                            <input type="checkbox" id="{{list.id}}" ng-model="list.state"/>
+                        </td>
+                        <td style="width:8%">
+                            {{list.id}}
+                        </td>
+                        <td style="width:20%;">
+                            {{list.product.code}}
+                        </td>
+                        <td style="width:18%">
+                            {{list.product.name}}
+                        </td>
+                        <td>
+                            {{list.product.BAR_CODE!=undefined?list.product.BAR_CODE:'-'}}
+                        </td>
+
+                        <td>
+                            {{list.expectedQuantityBU}}
+                        </td>
+                        <!-- <td ng-if="list.id">
+                            <input type="number" ng-model="list.id" class="reviewNum">
+                        </td>
+                        <td ng-if="!list.id">
+                            {{list.id}}
+                        </td> -->
+
+
+                        <td>
+                            {{list.inventoryStatus=='GOOD'?'良品':'不良品'}}
+                        </td>
+                        
+                        <td>
+                            {{list.product.isIMEI}}
+                        </td>
+                     
+                        
+                        <td style="width:20%"> 
+                            <span ng-repeat="listOne in list.wmsSnList" ng-show="$index < 5">{{listOne.serialNo}}({{listOne.status!=undefined?(listOne.status=='PICKED'?'已拣货':(listOne.status=='STORAGED'?'已上架':(listOne.status=='RECEIVED'?'已收货':(listOne.status=='SHIPPED'?'已发运':(listOne.status=='CHECKED'?'已复核':listOne.status))))):'-'}})<br/>
+                            <i class="fa fa-chevron-down" ng-if="$index >=4" ng-click="review.moreCode(list.wmsSnList , list.product.name)" style="cursor:pointer"></i></span>
+                            <!-- <i class="fa fa-chevron-down" ng-click="review.moreCode()" style="cursor:pointer"></i> -->
+                        </td>         
+                       
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="packPagination">
+            <uib-pagination class="pagination-prev-large" total-items="review.pageCount" items-per-page="review.pageSize" ng-change="review.getCodeDetail()" ng-model="review.page" max-size="review.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+            </uib-pagination>
+            <div class="selectNum">
+                <span class="refresh"><i class="fa fa-refresh"   ng-click="review.getCodeDetail()"></i></span>
+                <select class="form-control" ng-model="review.selected" ng-options="x.id as x.name for x in review.pages" ng-change="review.reviewChange(review.selected)">
+                </select>
+                <span class="selectText">条记录</span>
+            </div>
+             <span style="position:absolute;top:30px;right:20px;">共{{review.pageCount?review.pageCount:'□'}}条</span>
+        </div>
+        </div>
+    </div>
+    <div class="addGoods">
+        <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-archive"></i>&nbsp;装箱</h3>
+        </div>
+        <div class="goodsAdd">
+            <div class="numWeight">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">箱数</span>
+                    <input type="text" class="form-control" id="packBox">     
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">重量</span>
+                    <input type="text" class="form-control" id="packWeight">     
+                </div>           
+            </div>
+
+            <div class="editNum">
+                <button type="button" class="btn  btn-success confirmNum" id="confirmNum" ng-click="review.addPack()">确定(-)</button>
+                <button type="button" class="btn  btn-success deleteNum" ng-click="review.removePack()">移除</button>
+                <!-- <button type="button" class="btn  btn-success editRelation" ng-click="review.editRelation()">关系编辑</button> -->
+                <button type="button" class="btn  btn-success copyNum" ng-click="review.copyPack()">复制</button>
+            </div>
+            <div class="packingTableHeader">
+                 <table class="footable table table-stripped toggle-arrow-tiny packingTable" data-page-size="15">
+                    <thead>
+                        <tr>
+                            <th style="width:5%"><input type="checkbox" id="checkAll" ng-model="review.selectPackAll" ng-click="review.packAll(review.selectPackAll)"/></th>
+                            <th style="width:20%">序号</th>
+                            <th style="width:50%">箱号</th>
+                            <th style="width:25%">重量(KG)</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="packingContentTable">
+                <!-- <div class="loadingMask">
+                    <div class="loading" style="left: 41%;">
+                        <span class="loadingText">请稍后...</span>
+                    </div>
+                </div> -->
+                <div class="loadingMask">
+                    <div class="loading" style="left: 42%;width: 64px;">
+                        <!-- <span class="loadingText">请稍后...</span> -->
+                        <img src="../../resource/img/load.gif">
+                    </div>
+                </div>
+                <table class="footable table table-stripped toggle-arrow-tiny packingTable" data-page-size="15">
+
+                    <tbody>
+                        <tr ng-repeat="list in review.packList" start-foo-table>
+                            <td style="width:5%">
+                                <input type="checkbox" id="{{list.id}}" ng-model="list.state"/>
+                            </td>
+                            <td style="width:20%">
+                                {{list.lineNo}}
+                            </td>
+                            <td style="width:50%">
+                                {{list.packageBoxNo}}
+                            </td>
+                            <td style="width:25%">
+                                {{list.weight}}
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <uib-pagination class="pagination-prev-large" total-items="review.packPageCount" items-per-page="review.packPageSize" ng-change="review.getPackingInfo()" ng-model="review.packPage" max-size="review.packMaxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+            </uib-pagination>
+
+            <div class="selectNum">
+              <span class="refresh"><i class="fa fa-refresh" ng-click="review.getPackingInfo()"></i></span>
+              <select class="form-control" ng-model="review.packselected" ng-options="x.id as x.name for x in review.pages" ng-change="review.packingChange(review.packselected)"></select>
+              <span class="selectText">条记录</span>
+          </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="moreCode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog reviewSupply">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#449B51;">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-tasks" style="margin-right: 10px;"></i>所有串码
+                </h4>
+            </div>
+            <div class="modal-body">
+             <div class="supplyCheck">
+               <span class="supplyName">{{review.moreCodeName}}</span>
+                <div class="supplyList">
+
+                    <span ng-repeat="list in review.moreCodeList">{{list.serialNo}}({{list.status!=undefined?(list.status=='PICKED'?'已拣货':(list.status=='STORAGED'?'已上架':(list.status=='RECEIVED'?'已收货':(list.status=='SHIPPED'?'已发运':list.status)))):'-'}})<br/></span>
+
+                </div>
+             </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectCopyNum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog reviewSupply">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>复制
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="input-group">
+                    <span class="input-group-addon searchButton "><i class="fa  fa-star redColor"></i>&nbsp;拣货数量</span>
+                    <input type="number" class="form-control " id="copyNumCount">    
+                </div>
+             
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="review.submitCopyNum()">
+                    提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- <div class="modal fade" id="reviewSupply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog reviewSupply">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    复核供应商
+                </h4>
+            </div>
+            <div class="modal-body">
+             <div class="supplyCheck">
+               <span>选择你的性别</span>
+                <div class="supplyList">
+                    <label class="radio" ng-repeat="list in review.list |  limitTo : 6" >
+                        <input type="radio" name="supply" value="xx" ng-click="review.supplyId = list.phones_atom_id">
+                        {{list.receiver_address}}
+                    </label>
+                </div>
+             </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="review.submitSupply()">
+                    提交
+                </button>
+            </div>
+        </div>/.modal-content
+    </div>/.modal
+</div> -->
+
+
+
+<!-- jQuery and Bootstrap -->
+<script src="../../../COMMON/js/jquery/jquery-2.1.1.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap.min.js"></script>
+
+
+<!-- Main Angular scripts-->
+<script src="../../../COMMON/js/angular/angular.min.js"></script>
+<script src="../../../COMMON/js/angular/angular-ui-router.min.js"></script>
+<script src="../../../COMMON/js/angular/angular-sanitize.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="../../../COMMON/js/app.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/controller/outbound.controller.js"></script>
+<script src="../../js/service/outbound.service.js"></script>
+<script src="../../../COMMON/js/LodopFuncs.js"></script>
+<script src="../../js/print.js"></script>
+
+<script type="text/javascript">
+	/*$(document).keydown(function(event){
+        alert(event.keyCode);
+        if(event.keyCode == '13'){
+            alert('您输入的是回车键！');    
+        }
+    }); */
+</script>
+	
+
+</body>
+</html>

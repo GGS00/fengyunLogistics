@@ -1,0 +1,112 @@
+{
+    "tableInnerHtml": "",
+    "wmsPackageTask": {
+        "packageBoxQuantity": 6,
+        "outboundCode": "OUT_51DH_161125000001",
+        "billType": {
+            "id": 2301
+        },
+        "shipStatus": "UN_SHIP",
+        "weight": 6,
+        "expectedCheckQuantityBU": 0,
+        "status": "WORKING",
+        "cProvince": "江苏省",
+        "checkedQuantityBU": 0,
+        "allocatedQuantityBU": 1,
+        "pickedQuantityBU": 1,
+        "code": "PT_OUT_51DH_161125000001-01",
+        "warehouse": {
+            "id": 2184
+        },
+        "type": "NORMAL",
+        "shipQuantityBU": 0,
+        "info": {
+            "createdTime": "2016-11-25 17:08:36",
+            "lastOperatedTime": "2016-11-28 14:02:47",
+            "lastOperator": "卢其兵",
+            "creator": "卢其兵"
+        },
+        "waybillCode": "025002898288",
+        "id": 2002093,
+        "project": {
+            "id": 2152
+        },
+        "expectedQuantityBU": 1,
+        "outboundId": 2003693,
+        "checkStatus": "NON_CHECK",
+        "billTypeName": "销售出库单",
+        "volume": 0.06,
+        "owner": {
+            "id": 2170,
+            "name": "我要订货网"
+        },
+        "projectName": "DEFAULT"
+    },
+    "wmsOutbound": {
+        "pickStatus": "PICKED",
+        "weight": 0,
+        "receiver": {
+            "id": 3001182,
+            "name": "51dh-测试TEST-111111158",
+            "code": "51dh-测试TEST-111111158"
+        },
+        "shippedQuantityBU": 0,
+        "pickedQuantityBU": 1,
+        "warehouse": {
+            "name": "南京总仓"
+        },
+        "info": {
+            "lastOperatorId": 7715,
+            "createdTime": "2016-11-25 16:23:47",
+            "creatorId": 7715,
+            "lastOperatedTime": "2016-11-25 17:08:35",
+            "lastOperator": "卢其兵",
+            "creator": "卢其兵"
+        },
+        "id": 2003696,
+        "unReceicePayAmount": 0,
+        "allocateStatus": "ALLOCATED",
+        "packagedBoxQuantity": 0,
+        "expectedQuantityBU": 1,
+        "PROJECT_ID": 2152,
+        "billtypeId": 2301,
+        "finishTime": "2016-11-25 17:08:35",
+        "TRANS_LOCATION_ID": 85368,
+        "billType": {
+            "name": "销售出库单",
+            "code": "NORMAL_SHIP"
+        },
+        "shipStatus": "UN_SHIP",
+        "status": "WORKING",
+        "receiverContact": {
+            "contactor": "李阳",
+            "address": "江苏省南京市江宁区禄口镇蓝天路143号移动厅",
+            "province": "江苏省",
+            "mobile": "13912936869",
+            "city": "南京市"
+        },
+        "urgent": 0,
+        "customerLevel": 1,
+        "allocatedQuantityBU": 1,
+        "proirity": 0,
+        "warehouseId": 2184,
+        "code": "OUT_51DH_161125000001",
+        "orderTime": "2016-11-25 15:47:00",
+        "wayBillCode": "025002898288",
+        "timeBar": 2,
+        "project": {
+            "name": "DEFAULT"
+        },
+        "owerId": 2170,
+        "owner": {
+            "name": "我要订货网"
+        },
+        "volume": 0,
+        "finishPickingTime": "2016-11-25 17:08:35"
+    },
+    "additionalMsg": {
+        "message": "",
+        "status": "成功",
+        "processTime": 7.801
+    }
+}

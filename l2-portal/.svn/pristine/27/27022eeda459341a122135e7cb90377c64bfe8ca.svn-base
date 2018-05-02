@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="MainCtrl as main">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title page-title>包装任务管理</title>
+    <link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../COMMON/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/outBound.css" rel="stylesheet">   
+</head>
+<style>
+
+</style>
+<div class="searchContent animated fadeInRight">
+    <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-search"></i>&nbsp;包装任务管理</h3>
+    </div>
+    <div class="searchShow">
+
+        <div class="listLine">
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">发货单号</span>
+                <input type="text" class="form-control" id="packOutboundCode" style="font-size: 12px;">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">运单号</span>
+                <input type="text" class="form-control" id="packWaybillCode" style="font-size: 12px;">     
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">周转箱号</span>
+                <input type="text" class="form-control" id="packTurnoverCode" style="font-size: 12px;">     
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">包装任务号</span>
+                <input type="text" class="form-control" id="packCode" style="font-size: 12px;">     
+            </div>
+        </div>
+        <div class="listLine">
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">单据状态</span>
+                <select class="form-control" id="packStatus"> 
+                    <option value=""></option>
+                    <option value="OPEN">打开</option>
+                    <option value="WORKING">作业中</option>
+                    <option value="FINISHED">完成</option>
+                    <option value="CANCEL">取消</option>
+                    <option value="UNFINISHED" selected="selected">未完成</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">复核状态</span>
+                <select class="form-control" id="packCheckStatus"> 
+                    <option value=""></option>
+                    <option value="NON_CHECK">无需复核</option>
+                    <option value="UN_CHECK">未复核</option>
+                    <option value="PART_CHECK">部分复核</option>
+                    <option value="CHECKED">已复核</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">发运状态</span>
+                <select class="form-control" id="packShipStatus"> 
+                    <option value=""></option>
+                    <option value="UN_SHIP">待发运</option>
+                    <option value="PART_SHIPPED">部分发运</option>
+                    <option value="SHIPPED">已发运</option>
+                    <option value="UNSHIPPED" selected="selected">未发运</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon searchButton" style="width: 96px;">包装类型</span>
+                <select class="form-control" id="packTtype"> 
+                    <option value="" selected="selected"></option>
+                    <option value="NORMAL">正常包装</option> 
+                </select>
+            </div>
+        </div>
+        <div class="listLine">
+            <div id="datetimepicker" class="input-group">
+                <span class="input-group-addon searchButton">结束包装时间-起</span>
+                <input data-time-icon="icon-time" id="beginTaskTime" data-date-icon="icon-calendar"  class="add-on form-control" data-format="yyyy-MM-dd" type="text" readonly style="cursor:pointer;width:125%"></input>
+            </div>
+
+            <div id="datetimepicker1" class="input-group">
+                <span class="input-group-addon searchButton">结束包装时间-止</span>
+                <input  data-time-icon="icon-time" id="endTaskTime" data-date-icon="icon-calendar" class="add-on form-control" data-format="yyyy-MM-dd" type="text" readonly style="cursor:pointer;width:125%"></input>
+            </div>
+        </div>
+        <button type="button" class="btn searchBtn btn-danger" ng-click="main.backToOld()" style="right:174px;">返回老页面</button>
+        <button type="button" class="btn searchBtn btn-primary" ng-click="main.searchPack()">查询</button>
+        <div id="checkAndPackage_msg" class="msg"></div>
+    </div>
+</div>
+
+<!-- Main view  -->
+
+
+<div class="ibox animated fadeInRight">
+    <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-bar-chart-o"></i>&nbsp;包装任务管理</h3>
+    </div>
+
+    <div class="menuList animated fadeInRight">
+        <button type="button" class="btn  btn-white" ng-click="main.goodsReview()">复核</button>
+     <!--    <button type="button" class="btn  btn-success" ng-click="main.goodsSendDetail()">查看发货明细</button>
+     <button type="button" class="btn  btn-white" ng-click="main.goodsPackDetail()">查看包装明细</button> -->
+        <button type="button" class="btn  btn-success"  ng-click="main.goodsSend()">发运</button>
+        <button type="button" class="btn  btn-white" ng-click="main.goodsBackup()">退拣</button>
+        <button type="button" class="btn  btn-success" ng-click="main.goodsExport()">导出</button>
+    </div>
+    <div class="showAll">
+        <button type="button" class="btn  btn-success" ng-click="main.listShow == 15?main.listShow=main.tableLength-1:main.listShow=15">显示全部</button>
+    </div>
+    <div class="packTableHeader">
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <thead class="iboxHeader">
+                <tr>
+                    <th style="width: 2%;"><input type="checkbox" id="checkAll" ng-model="main.selectAll" ng-click="main.all(main.selectAll)"/></th>
+
+                    <th ng-repeat="list in main.tableList" ng-if="list.HIDDEN == 'false'" ng-show="$index < main.listShow" style="width:calc(100%/{{main.trueLength}})" ng-bind-html="list.COL_NAME">
+                       
+                    </th>
+                    
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ibox-content">
+
+        <div class="loadingMask">
+            <div class="loading">
+                <span class="loadingText">请稍后...</span>
+            </div>
+        </div>
+
+        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+            <tbody>
+                <tr ng-repeat="list in main.list" start-foo-table>
+                    <td style="width: 2%;">
+                        <input type="checkbox" ng-model="list.state"/>
+                    </td>
+                    <!-- <td  ng-repeat="(key,value) in list track by $index"  ng-show="$index < main.listShow" ng-if=" key != 'state'" style="width:calc(100%/{{main.tableLength}})">
+                        {{value}}
+                    </td> -->
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.owner.name}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.outboundCode}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.waybillCode}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.code}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.type!=undefined?(list.type == "NORMAL"?'正常包装':list.type):'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.status!=undefined?(list.status == "OPEN"?'打开':(list.status == 'WORKING'?'作业中':(list.status =='FINISHED'?'完成':(list.status =='CANCEL'?'取消':list.status)))):'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.checkStatus!=undefined?(list.checkStatus == 'NON_CHECK'?'无需复核':(list.checkStatus == 'UN_CHECK'?'未复核':(list.checkStatus == 'PART_CHECK'?'部分复核':(list.checkStatus == 'CHECKED'?'已复核':list.checkStatus)))):'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.shipStatus!=undefined?(list.shipStatus=='UN_SHIP'?'待发运':(list.shipStatus=='PART_SHIPPED'?'部分发运':(list.shipStatus=='SHIPPED'?'已发运':list.shipStatus))):'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.packageBoxQuantity}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.weight}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.volume}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.shipQuantityBU}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.expectedCheckQuantityBU}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})">
+                        {{list.checkedQuantityBU}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.expectedQuantityBU}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.allocatedQuantityBU}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.pickedQuantityBU}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.cProvince!=undefined?list.cProvince:'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.info.creator!=undefined?list.info.creator:'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.info.createdTime!=undefined?list.info.createdTime:'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.info.lastOperator!=undefined?list.info.lastOperator:'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.info.lastOperatedTime!=undefined?list.info.lastOperatedTime:'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.overPackageTime!=undefined?list.overPackageTime:'-'}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.billTypeName}}
+                    </td>
+                    <td style="width:calc(100%/{{main.trueLength}})" ng-show="main.listHide < main.listShow">
+                        {{list.projectName}}
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="packPagination">
+        <uib-pagination class="pagination-prev-large" total-items="main.pageCount" items-per-page="main.pageSize" ng-change="main.getList()" ng-model="main.page" max-size="main.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+        </uib-pagination>
+        <div class="selectNum">
+            <span class="refresh"><i class="fa fa-refresh" ng-click="main.getList()"></i></span>
+           <select class="form-control" ng-model="main.selected" ng-options="x.id as x.name for x in main.pages" ng-change="main.packChange(main.selected)"></select>
+            <span class="selectText">条记录</span>
+        </div>
+    </div>
+</div>
+
+<!-- 导出明细 -->
+<div id="wmsOutboundItem_scan_srchDiv" style="display: none;">
+        <form id="wmsOutboundItem_scan_srchFormOne" class="frmSearch" action="" autocomplete='off'>
+            <input type="hidden" name="bean" value="wmsPackageTask"/>
+            <input type="hidden" name="method" value="page"/>
+            <input type="hidden" name="outboundCode" value="{{main.outboundCode}}" id="outboundCode"/>
+            <input type="hidden" name="waybillCode" value="{{main.waybillCode}}" id="waybillCode"/>
+            <input type="hidden" name="code" value="{{main.code}}" id="code"/>
+            <input type="hidden" name="type" value="{{main.type}}" id="type"/>
+            <input type="hidden" name="status" value="{{main.status}}" id="status"/>
+            <input type="hidden" name="checkStatus" value="{{main.checkStatus}}" id="checkStatus"/>
+            <input type="hidden" name="shipStatus" value="{{main.shipStatus}}" id="shipStatus"/>
+            <input type="hidden" name="turnoverCode" value="{{main.turnoverCode}}" id="turnoverCode"/>
+            <input type="hidden" name="beginTaskTime" value="{{main.beginTaskTime}}" id="beginTaskTime"/>
+            <input type="hidden" name="endTaskTime" value="{{main.endTaskTime}}" id="endTaskTime"/>
+        </form>
+</div>
+
+
+<div class="modal fade" id="goodsBackup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 270px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 ng-if="main.taskCheckStatus == 'NON_CHECK'" class="modal-title" id="myModalLabel">
+                    <i class="fa fa-pencil-square-o" style="margin-right: 10px;"></i>非串码货品退拣
+                </h4>
+
+                <h4 ng-if="main.taskCheckStatus != 'NON_CHECK'" class="modal-title" id="myModalLabel">
+                    <i class="fa fa-pencil-square-o" style="margin-right: 10px;"></i>串码货品退拣
+                </h4>
+            </div>
+            <div class="modal-body">
+                <!-- 非串码显示 -->
+                <div ng-if="main.taskCheckStatus == 'NON_CHECK'">
+
+                    <div class="input-group">
+                        <span class="input-group-addon searchButton">货品数</span>
+                        <input type="number" class="form-control" id="goodsCount">     
+                    </div>
+                    
+                </div>
+
+                <!-- 串码显示 -->     
+                <div ng-if="main.taskCheckStatus != 'NON_CHECK'">
+                    <div class="groupHeader">
+                        <div class="input-group" style="width: 46%;float: left;margin-left: 1%;">
+                            <span class="input-group-addon searchButton">非串码货品数</span>
+                            <input type="text" class="form-control" value="{{main.taskExpectedQuantityBU - main.taskExpectedCheckQuantityBU}}" readonly>     
+                        </div>
+                        <div class="input-group" style="width: 46%;float: left;margin-left: 4%;">
+                            <span class="input-group-addon searchButton">串码货品数</span>
+                            <input type="text" class="form-control" value="{{main.taskExpectedCheckQuantityBU}}" readonly>     
+                        </div>
+                    </div>
+                    <div class="groupBody">
+                        <textarea class="imeisNo" placeholder="请输入串号"></textarea>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="imeisNoMsg"></div>
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="main.prePickedBack()">
+                    退拣确认
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+
+<!-- jQuery and Bootstrap -->
+<script src="../../../COMMON/js/jquery/jquery-2.1.1.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap.min.js"></script>
+
+<!-- Main Angular scripts-->
+<script src="../../../COMMON/js/angular/angular.min.js"></script>
+<script src="../../../COMMON/js/angular/angular-sanitize.min.js"></script>
+
+<script src="../../../COMMON/js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="../../../COMMON/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+<script src="../../../COMMON/js/app.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/controller/outbound.controller.js"></script>
+<script src="../../js/service/outbound.service.js"></script>
+<script src="../../js/print.js"></script>
+
+<script type="text/javascript">
+
+    $.fn.datetimepicker.dates['zh'] = {  
+                days:       ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六","星期日"],  
+                daysShort:  ["日", "一", "二", "三", "四", "五", "六","日"],  
+                daysMin:    ["日", "一", "二", "三", "四", "五", "六","日"],  
+                months:     ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月","十二月"],  
+                monthsShort:  ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"],  
+                meridiem:    ["上午", "下午"],  
+                //suffix:      ["st", "nd", "rd", "th"],  
+                today:       "今天"  
+     };  
+
+     $(function() {
+        $('#datetimepicker').datetimepicker({
+          language: 'zh',
+          autoclose:'true'
+        });
+         $('#datetimepicker1').datetimepicker({
+          language: 'zh',
+          autoclose:'true'
+        });
+    });
+
+    /*$(document).keydown(function(event){
+        if(event.keyCode == '13'){
+            $("#xxx").click();
+               
+        }
+    }); */
+
+    
+	
+</script>
+	
+
+</body>
+</html>

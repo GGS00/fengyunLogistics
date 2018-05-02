@@ -1,0 +1,207 @@
+angular.module('app')
+	.factory('Area', Area)
+
+function Area($http) {
+	return {
+		getTableHead: getTableHead,
+		getAreaList: getAreaList,
+		getDetailTableHead: getDetailTableHead,
+		getDeatailAreaList: getDeatailAreaList,
+		getproductTableHead: getproductTableHead,
+		getproductAreaList: getproductAreaList,
+		getSingleNewList: getSingleNewList,
+		getSingleDelete: getSingleDelete,
+		getDeatailEoeiADD: getDeatailEoeiADD,
+		getSelectStorage: getSelectStorage,
+		getObjTableHead: getObjTableHead,
+		getObjAreaList: getObjAreaList,
+		getDetailupdateEieoDet: getDetailupdateEieoDet,
+		getDeatailEieoDet: getDeatailEieoDet,
+		getActiveWmsEieo: getActiveWmsEieo
+	}
+	/**
+	 * 建单操作 表头数据 网络请求
+	 */
+	function getTableHead(vm) {
+		return $http({
+			url: '../../json/eoei/tabletitle1.json',
+			method: "get",
+			params: {
+			}
+		});
+	}
+	/**
+	 * 空进空出单新建   网络请求
+	 */
+	function getSingleNewList(vm) {
+		return $http({
+			url: "" + Comm_Config + "wmsEieo/add",
+			method: "post",
+			params: {}
+		});
+	}
+	/**
+	 * 空进空出单删除 网络请求
+	 */
+	function getSingleDelete(vm) {
+		return $http({
+			url: "" + Comm_Config + "wmsEieo/deleteWmsEieo",
+			method: "post",
+			params: {
+				id: vm.sign_del_id,
+			}
+		});
+	}
+	// 建单操作 表内容数据 网络请求
+	function getAreaList(vm) {
+		return $http({
+			url: "" + Comm_Config + "process",
+			method: "post",
+			params: {
+				bean: 'wmsEieo',
+				method: 'page',
+				code: vm.singleCode, //单号
+				status: vm.singleStatus, //状态
+				created_time: vm.singleCreateTime, //创建时间
+				last_operator: vm.singleModifier, //修改人
+				last_operated_time: vm.singleModifTime, //修改时间
+				page: vm.currentpage,
+				rows: vm.pageSize
+					//	                            page:vm.page,
+					//								rows:vm.pageSize
+			}
+		});
+	}
+	function getActiveWmsEieo(vm) {
+		return $http({
+			url: "" + Comm_Config + "wmsEieo/activeWmsEieo",
+			method: "post",
+			params: {
+				ids: vm.ids, //单号
+			}
+		});
+	}
+	//	明细操作 表头数据 网络请求
+	function getDetailTableHead() {
+		return $http({
+			url: '../../json/eoei/tabletitle2.json',
+			method: "get",
+			params: {}
+		});
+	}
+	//	明细操作 表内容数据 网络请求
+	function getDeatailAreaList(vm) {
+		return $http({
+			url: "" + Comm_Config + "process",
+			method: "post",
+			params: {
+				bean: "wmsEieoDet",
+				method: "page",
+				eieoId: vm.eieoId,
+				status: vm.eieoStatus,
+				page: vm.detailcurrentpage,
+				rows: vm.detailpageSize,
+				srcProId: vm.eieosrcProId,
+				destProId: vm.eieodestProId,
+				srcProCode: vm.srcProCode,
+				destProCode: vm.destProCode
+			}
+		});
+	}
+	function getSelectStorage() {
+		return $http({
+			url: "" + Comm_Config + "wmsEieoDetail/listloc",
+			method: "post",
+			params: {
+			}
+		});
+	}
+	function getDetailupdateEieoDet(vm) {
+		return $http({
+			url: "" + Comm_Config + "wmsEieoDetail/updateEieoDet",
+			method: "post",
+			params: {
+				detId: vm.detId,
+				srcInvId: vm.srcInvId,
+				qty: vm.qty,
+				srcProId: vm.srcProid,
+				destProId: vm.destProId
+			}
+		});
+	}
+	//	明细操作 添加明细  网络请求
+	function getDeatailEoeiADD(vm) {
+		return $http({
+			url: "" + Comm_Config + "wmsEieoDetail/doEieoDet",
+			method: "post",
+			params: {
+				eieoId: vm.eieoId,
+			}
+		});
+	}
+	function getDeatailEieoDet(vm) {
+		return $http({
+			url: "" + Comm_Config + "wmsEieoDetail/deleteEieoDet",
+			method: "post",
+			params: {
+				detId: vm.eieoDetId,
+			}
+		});
+	}
+	//	添加明细 表头数据 网络请求
+	function getproductTableHead() {
+		return $http({
+			url: '../../json/eoei/tabletitle3.json',
+			method: "get",
+			params: {
+			}
+		});
+	}
+	//	添加明细 表内容数据 网络请求
+	function getproductAreaList(vm) {
+		return $http({
+			url: "" + Comm_Config + "process",
+			method: "post",
+			params: {
+				bean: "wmsInventory",
+				method: 'page',
+				ownerName: vm.ownerName,
+				supplierName: vm.supplierName,
+				productCode: vm.productCode,
+				productName: vm.productName,
+				status: vm.status,
+				locationName: vm.locationName,
+				barCode: vm.barCode,
+				locationType: "STORAGE",
+				locationCode: vm.locationCode,
+				page: vm.productcurrentpage,
+				rows: vm.productpageSize
+			}
+		});
+	}
+	//	添加目标明细 表头数据 网络请求
+	function getObjTableHead() {
+		return $http({
+			url: '../../json/eoei/tabletitle4.json',
+			method: "get",
+			params: {
+			}
+		});
+	}
+	//	添加目标明细 表内容数据 网络请求
+	function getObjAreaList(vm) {
+		return $http({
+			url: "" + Comm_Config + "process",
+			method: "post",
+			params: {
+				bean: "bisProduct",
+				method: 'page',
+				code: vm.objcode,
+				name: vm.objName,
+				barCode: vm.objbarCode,
+				page: vm.objcurrentpage,
+				rows: vm.objpageSize
+			}
+		});
+	}
+}

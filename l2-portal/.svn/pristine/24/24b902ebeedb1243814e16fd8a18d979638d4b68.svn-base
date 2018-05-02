@@ -1,0 +1,686 @@
+*{
+    font-family: 微软雅黑;
+}
+
+body{
+    background: #ECF0F5;
+}
+
+table { 
+    table-layout: fixed;
+    word-wrap:break-word;
+}
+div { 
+    word-wrap:break-word;
+}
+
+.modal-header{
+    background: #0083A4;
+    color: #fff;
+}
+
+.searchContent{
+    position: relative;
+    height: 277px;
+    width: 98%;
+    margin: 7px auto;
+    margin-top: 14px;
+    background: #fff;
+    box-shadow: rgb(207, 203, 203) 0px 4px 10px;
+    border-radius: 3px;
+}
+
+/* .btn-info{
+    border-radius: 0;
+    padding: 2px 10px;
+} */
+
+.searchContent .box-header{
+    color: #fff;
+    background: #00A7D0;
+    background-color: #00A7D0;
+    display: block;
+    padding: 6px 10px;
+    position: relative;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.searchContent .box-header .box-title{
+    display: inline-block;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1;
+}
+
+.ibox .box-header{
+    color: #fff;
+    background: #00A7D0;
+    background-color: #00A7D0;
+    display: block;
+    padding: 6px 10px;
+    position: relative;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.ibox .box-header .box-title{
+    display: inline-block;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1;
+}
+
+.searchContent .searchBtn{
+    position: absolute;
+    bottom: 6%;
+    right: 2%;
+    width: 116px;
+}
+
+.division{
+    width: 100%;
+    height: 18px;
+    background: #ECF0F5;
+    border-bottom: #D2D6DE 1px solid;
+    border-top: #D2D6DE 1px solid;
+}
+
+.searchShow{
+    width: 100%;
+    height: 236px;
+    padding: 12px;
+}
+
+.searchButton{
+	color: #000;
+    /* background: -webkit-linear-gradient(#00A9EC, #007FA9); */
+    background:#fff;
+    font-family: 微软雅黑;
+    line-height: 13px;
+    width:135px;
+
+}
+
+.menuList{
+    width: 94%;
+    margin: 24px 16px;
+    height: 34px;
+    background: #fff;
+    margin-bottom: 60px;        
+}
+
+.menuList .btn-success{
+    width: 150px;
+    border-radius: 0;
+    float: left;
+    margin: 0;
+    margin-bottom: 10px;
+    background-color: #1AB394;
+    border-color: #1AB394;
+   /*  box-shadow: rgb(207, 203, 203) 0px 6px 10px; */
+}
+
+.menuList .btn-white{
+    width: 150px;
+    color: inherit;
+    background: white;
+    border: 1px solid #e7eaec;
+    border-radius: 0;
+    float: left;
+    margin: 0;
+    margin-bottom: 10px;
+    /* box-shadow: rgb(207, 203, 203) 0px 2px 10px; */
+}
+
+.ibox .ibox-content{
+    position: relative;
+    padding: 12px;
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 0px;
+}
+
+.ibox-content .export{
+    background-color: #1A7BB9;
+    border-color: #1A7BB9;
+    margin-left: 15px !important;
+}
+
+.ibox .ibox-content .packCheck tr:nth-child(odd){
+    background-color: #E6E8E0;
+
+}
+
+.searchContent .input-group{
+    float: left;
+    width: 15%;
+    margin: 12px 1%;
+    margin-right: 9%;
+}
+
+.searchContent .input-group .form-control{
+    width: 200%;
+}
+
+.reviewContent .reviewShow .input-group{
+    float: left;
+    width: 15%;
+    margin: 12px 1%;
+    margin-right: 9%;
+}
+
+.reviewContent .reviewSearch .input-group{
+    width: 400px;
+    margin-right: 18px;
+    float: left;
+}
+
+.reviewSearch{
+    width: 100%;
+    height: 64px;
+    padding: 28px;
+    padding-bottom: 0px;
+}
+
+.reviewSearch .searchButton{
+    background: #3C8DBC;
+    color: #fff;
+    width: 137px;
+}
+
+.reviewContent .input-group .form-control{
+    width: 260%;
+}
+
+.selectNum{
+    width: 158px;
+    position: absolute;
+    bottom: 36px;
+    right: 0px;
+}
+
+.selectNum .form-control{
+	width: 38%;
+    float: left;
+    padding: 6px 6px;
+    height: 32px;
+}
+
+.refresh{
+    float: left;
+    margin-right: 16px;
+    margin-top: 6px;
+}
+
+.selectText{
+	font-size: 14px;
+    line-height: 34px;
+    margin-left: 5px;
+}
+
+.packTableHeader{
+    padding-right: 29px;
+    padding-left: 12px;
+}
+
+.packCheck{
+    font-size: 8px;
+    margin-bottom: 0px
+}
+
+.packCheck tbody td{
+    text-align: center;
+}
+.packCheck thead th{
+    text-align: center;
+}
+
+.packCheck tbody td{
+    text-align: center;
+}
+
+.packCheck tbody tr:first-child td{
+    border-top:none;
+}
+
+.packPagination{
+    position:relative;
+}
+
+.packPagination .pagination{
+    margin: 20px 30px;
+}
+
+.packPagination .selectNum{
+    width: 158px;
+    position: absolute;
+    bottom: 22px;
+    right: 0px;
+
+}
+
+.showAll{
+    position: absolute;
+    top: 100px;
+    right: 34px;
+}
+
+.ibox{
+    position: relative;
+    width: 98%;
+    margin: 26px auto;
+    background: #fff;
+    box-shadow: rgb(207, 203, 203) 0px 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 80px;
+}
+
+.btn-primary {
+    background-color: #3B98C5;
+    border-color: #3B98C5;
+    color: #FFFFFF;
+}
+
+.refresh{
+    cursor:pointer;
+}
+
+/*打包复核2.0.2*/
+
+.mainBox{
+    width: 98%;
+    margin: 18px auto;
+    height: 750px;
+}
+
+.main-box{
+    border-radius: 3px;
+    width:71%;
+    float:left;
+    background: #fff;
+    box-shadow: rgb(207, 203, 203) 0px 4px 10px;
+    position:relative;
+}
+
+.mainBox .addGoods{
+    width:28%;
+    float:left;
+    height: 748px;
+    margin-left:1%;
+    background: #fff;
+    box-shadow: rgb(207, 203, 203) 0px 4px 10px;
+    border-radius: 3px;
+}
+
+.reviewOperation{
+    width: 48%;
+    float: left;
+}
+
+.reviewOperation .btn-success{
+    margin-left:10px;
+
+}
+
+.reviewOperation .searchOperation{
+    float:left;
+}
+
+.reviewOperation .endPackage{
+    float:left;
+    background-color: #DD4B39;
+    border-color: #DD4B39;
+}
+
+.reviewOperation .printList{
+    float:left;
+    background-color: #F7A54A;
+    border-color: #F7A54A;
+}
+
+.reviewOperation .printWay{
+    float:left;
+    background-color: #1A7BB9;
+    border-color: #1A7BB9;
+}
+
+.reviewContent{
+    position: relative;
+    height: 364px;
+    width: 98%;
+    margin: 7px auto;
+    margin-top: 14px;
+    background: #fff;
+    box-shadow: rgb(207, 203, 203) 0px 4px 10px;
+    border-radius: 3px;
+
+}
+
+.reviewContent .searchBtn{
+    position: absolute;
+    bottom: 6%;
+    right: 2%;
+    width: 116px;
+}
+
+.reviewShow{
+    padding: 10px;
+    width: 100%;
+    height: 268px;
+    padding-top: 16px;
+}
+
+.main-box .ibox-content{
+    padding: 12px;
+}
+
+.main-box .ibox-content .input-group{
+    margin-top: 24px;
+    width: 24%;
+    margin: 10px 0 4px 16px;
+}
+
+.reviewContent .box-header{
+    color: #fff;
+    background: #00a65a;
+    background-color: #00a65a;
+    display: block;
+    padding: 6px 10px;
+    position: relative;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.reviewContent .box-header .box-title{
+    display: inline-block;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1;
+}
+
+.main-box .box-header{
+    color: #fff;
+    background: #00A4CC;
+    background-color: #00A4CC;
+    display: block;
+    padding: 6px 10px;
+    position: relative;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.main-box .box-header .box-title{
+    display: inline-block;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1;
+}
+
+.addGoods .box-header{
+    color: #fff;
+    background: #00A4CC;
+    background-color: #00A4CC;
+    display: block;
+    padding: 6px 10px;
+    position: relative;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.addGoods .box-header .box-title{
+    display: inline-block;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1;
+}
+
+.addGoods .goodsAdd{
+    padding:12px;
+    position: relative;
+}
+
+.numWeight{
+    margin-top: 8px;
+}
+
+.numWeight .input-group{
+    margin-bottom: 16px;
+}
+
+.editNum .deleteNum{
+    background-color: #DD4B39;
+    border-color: #DD4B39;
+}
+
+.editNum .editRelation{
+    background-color: #F7A54A;
+    border-color: #F7A54A;
+}
+
+.editNum .copyNum{
+    background-color: #1A7BB9;
+    border-color: #1A7BB9;
+}
+
+.mainBox #search-btn{
+    background: #5CB85C;
+    color: #fff;
+}
+
+.packingTable{
+    margin-top: 14px;
+}
+
+
+.reviewCheck{
+    font-size:8px;
+    margin-bottom: 0px;
+}
+
+.reviewCheck th{
+    width:calc(100%/10);
+}
+
+.reviewCheck td{
+    width:calc(100%/10);
+}
+
+.reviewCheck thead th{
+    text-align: center;
+}
+
+.reviewCheck tbody td{
+    text-align: center;
+}
+
+.reviewTableHeader{
+    padding: 12px;
+    padding-bottom: 0px;
+    padding-right: 17px;
+    padding-left: 0;
+}
+
+.reviewTableContent{
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 0px;
+    position: relative;
+
+}
+
+.reviewCheck tbody tr:first-child td{
+    border-top:none;
+}
+
+.reviewSupply{
+    margin-top: 170px;
+}
+
+.packingContentTable{    
+    height: 434px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 0px;
+    position: relative;
+}
+
+.packingTableHeader{
+    padding-right: 17px;
+}
+    
+.packingTableHeader .packingTable{
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.packingTableHeader th{
+    font-size: 8px;
+    text-align: center;
+}
+
+.packingContentTable .packingTable{
+    margin-top:0px;
+}
+
+.packingContentTable tbody tr:first-child td{
+    border-top:none;
+}
+
+.packingContentTable .packingTable{
+    font-size: 8px;
+    text-align: center;
+}
+
+.supplyList{
+    color: #7B7676;
+    font-size: 16px;
+    margin-top: 9px;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.reviewNum{
+    width: 100%;
+    text-align: center;
+    border: #8A977B 1px solid;
+}
+
+.reviewTableContent .reviewCheck tr:nth-child(odd){
+    background-color: #E6E8E0;
+
+}
+
+.redColor{
+    /* background: #DD4B39 !important; */
+    color: #DD4B39;
+}
+
+.voice{
+    position: absolute;
+    top: 56px;
+    right: 34px;
+    font-size: 20px;
+}
+
+.supplyCheck{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.supplyName{
+    font-size: 22px;
+    color: #686868;
+}
+
+.loading{
+    position: absolute;
+    top: 80px;
+    left: 43%;
+   
+}
+
+.loadingMask{
+    width: 100%;
+    height: 100%;
+    background: #888E88;;
+    opacity: 0.4;
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    display:none;
+}
+
+.loadingText{
+    padding: 6px 10px;
+    background: #131313;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.ifprint{
+    float: left;
+    font-size: 15px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+#checkAndPackage_msg{
+    width: 90%;
+    height: 20px;
+    position: absolute;
+    bottom: 6px;
+    left: 16px;
+}
+
+.groupHeader{
+    height: 38px;
+}
+
+.groupBody{
+    margin-top: 12px;
+}
+
+.groupBody textarea{
+    resize: none;
+    border: 1px #ccc solid;
+    width: 98%;
+    height: 200px;
+    padding: 10px;
+}
+
+.imeisNoMsg{
+    position: absolute;
+    left: 18px;
+    bottom: 20px;
+}
+
+.msgtips{
+    margin-top: 250px;
+}
+
+#msgTips .modal-header{
+    background: #DD4B39;
+}
+
+.modal .modal-header{
+    padding: 8px;
+    padding-left: 14px;
+}
+
+.modal .modal-header h4{
+   font-size: 15px;
+}
+
+.backToPack{
+    position: absolute;
+    top: 60px;
+    right: 62px;
+    width: 90px;
+    background-color: #3B98C5;
+    border-color: #3B98C5;
+}

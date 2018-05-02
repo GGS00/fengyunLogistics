@@ -1,0 +1,32 @@
+{
+	"resultValue": [
+		{
+			"title": "Id",
+			"hidden": true
+		}, {
+			"title": "单号",
+			"hidden": false
+		}, {
+			"title": "项目",
+			"hidden": false
+		}, {
+			"title": "单据类型",
+			"hidden": false
+		}, {
+			"title": "状态",
+			"hidden": false
+		}, {
+			"title": "期望数量",
+			"hidden": false
+		}, {
+			"title": "移位数量",
+			"hidden": false
+		}, {
+			"title": "最后修改人",
+			"hidden": false
+		}, {
+			"title": "最后修改时间",
+			"hidden": false
+		}
+	]
+}

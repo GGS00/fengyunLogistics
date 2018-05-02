@@ -1,0 +1,5 @@
+/*var Home_host = window.location.host;*/
+/*var Home_host = window.location.host;*/
+var Home_host = "172.18.12.110:8084";
+var Comm_Config =  "http://"+Home_host+"/logistics/";
+

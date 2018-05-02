@@ -1,0 +1,45 @@
+angular
+	.module('app')
+    .factory('Area', Area)
+
+function Area($http){
+	return {
+		getAreaList:getAreaList,
+		getWlList:getWlList
+
+	}
+
+
+    /*查询接口*/
+	function getAreaList(vm){
+		return $http({url: /*""+ Comm_Config + "process"*/'../../json/pack.json',method: "get",
+						params:{
+							
+							code:vm.searchOrderNum,
+							wl:vm.selected
+	                            			
+							}
+						});
+	}
+
+
+	/*获得物流公司名列表*/
+	function getWlList(vm){
+		return $http({url:/*""+ Comm_Config + "process"*/'../../json/data.json',method: "get",
+						params:{
+	                            
+							
+							}
+						});
+	}
+
+
+	
+	
+}
+
+
+
+
+
+

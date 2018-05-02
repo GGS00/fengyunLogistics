@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="IndexCtrl as indexCtrl" lang="zh-CN">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../COMMON/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/eoei.css" />
+		<link rel="stylesheet" href="../../../COMMON/css/animate.css" />
+		<link href="../../../COMMON/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../COMMON/css/font-awesome/css/font-awesome.css" />
+		<title>空进空出 </title>
+	</head>
+	<style>
+		.dropdown-menu ul {
+			list-style: none;
+			padding-left: 10px;
+		}
+		
+		.dropdown-menu th {
+			text-align: center;
+		}
+	</style>
+
+	<body>
+		<div id="danger-dialog" class="animated fadeInLeftBig alert alert-danger tc-dialog">
+			<strong ng-model=" indexCtrl.dangerText">警告！{{indexCtrl.dangerText}}</strong>
+		</div>
+		<div id="success-dialog" class="animated fadeInLeftBig alert alert-success tc-dialog">
+			<strong ng-model="indexCtrl.successText">成功！{{indexCtrl.successText}}</strong>
+		</div>
+		<div class="container-fluid animated fadeInRight">
+
+			<div class="panel panel-default content-top">
+				<div class="modal-custom-header">
+					<h3 class="modal-custom-title"><i class="fa fa-line-chart"></i>建单操作</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12">
+							<button type="button" class="btn btn-success top-button" data-toggle="modal" data-target="#single_select_dialog">查 询</button>
+							<button type="button" class="btn btn-info top-button" id="single_new">新建</button>
+							<button type="button" class="btn btn-warning top-button" id="sigle_delete">删除</button>
+							<button type="button" class="btn btn-danger top-button" id="sigle_effective">生效</button>
+						</div>
+					</div>
+					<div class="row table-responsive" style="height: 200px;">
+						<table id="" class="table table-bordered table-hover table-distances">
+							<thead>
+								<tr>
+									<th class="all-table-title">
+										<input type="checkbox" id="checkAll" class="all-checkbox" ng-model="indexCtrl.selectAll" ng-click="indexCtrl.all(indexCtrl.selectAll)" />
+										<span style="font-size: 4px;vertical-align:middle;">(全选)</span	
+								     ></th>
+									<th class="all-table-title" ng-if="list.hidden==false" ng-repeat="list in indexCtrl.tableList">
+										{{list.title}}
+									</th>
+								</tr>
+							</thead>
+							<tbody >
+								<tr ng-repeat="list in indexCtrl.list"  ng-click="indexCtrl.selectAddDetail($index)" >
+									<td class="all-table-title">  <input type="checkbox"  class="all-checkbox"   ng-click="indexCtrl.selectCheckBox($index)" ng-model="list.state"/></td>
+									<td class="all-table-title">{{list.code}}</td>
+									<td class="all-table-title">{{list.PROJECTNAME}}</td>
+									<td class="all-table-title">{{list.TYPENAME}}</td>
+									<td class="all-table-title">{{list.status}}</td>
+									<td class="all-table-title">{{list.expected_quantity_bu}}</td>
+									<td class="all-table-title">{{list.moved_quantity_bu}}</td>
+									<td class="all-table-title">{{list.last_operator}}</td>
+									<td class="all-table-title">{{list.last_operated_time}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="" class="row">
+						<div class="visble-border col-xs-2 col-sm-2">
+							<select  ng-model="indexCtrl.selected" ng-options="x.id as x.name for x in indexCtrl.pages" ng-change="indexCtrl.packChange(indexCtrl.selected)"></select>
+							<span>记录</span>
+					</div>
+					<div class=" col-xs-4 col-sm-4">
+						<uib-pagination total-items="indexCtrl.totalitems" ng-change="indexCtrl.getList()" ng-model="indexCtrl.currentpage" items-per-page="indexCtrl.pageSize" max-size="indexCtrl.maxsize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true" boundary-link-numbers="true"></uib-pagination>
+					</div>
+
+				</div>
+				<div id="" class="row">
+					<div class="visble-border2 col-xs-6 col-sm-6">
+						<span>操作：{{indexCtrl.success}}   耗时：{{indexCtrl.processTime}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="container-fluid animated fadeInRight">
+			<div class="panel panel-default content-top">
+				<div class="modal-custom-header">
+					<h3 class="modal-custom-title"><i class="fa fa-align-left"></i>明细操作</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12">
+							<button type="button" class="btn btn-info top-button" ng-click="indexCtrl.eieoSelectDialog()">查询明细</button>
+							<button type="button" class="btn btn-warning top-button" id="eieo_new">新建明细</button>
+							<button type="button" class="btn btn-success top-button" id="eieo_delete">删除明细</button>
+
+						</div>
+					</div>
+					<div class="row table-responsive">
+						<table id="" class="table table-bordered table-hover table-distances">
+							<thead>
+								<tr>
+
+									<th class="all-table-title">
+										<input type="checkbox" id="checkAll" class="all-checkbox" ng-model="indexCtrl.detailselectAll" ng-click="indexCtrl.detailAll(indexCtrl.detailselectAll)" />
+										<span style="font-size: 4px;vertical-align:middle;">(全选)</span	
+								     ></th>
+									<th class="all-table-title" ng-if="list.hidden==false" ng-repeat="list in indexCtrl.detailtableList">
+										{{list.title}}
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--"last_operator":"bytest",
+            "status":"FINISHED",
+            "src_inv_id":2005832,
+            "last_operated_time":"2016-12-06 10:14:27",
+            "last_operator_id":1,
+            "DESTCODE":"51DH-dh14611412927447",
+            "creator_id":1,
+            "creator":"bytest",
+            "SRCCODE":"51DH-dh14762640165375",
+            "id":9,
+            "src_product_id":3000239,
+            "SRCNAME":"三角牌电磁炉PX-B1T 配汤锅-黑",
+            "DESTNAME":"条码 不干胶标签（25x45MMx3600张）-不分色",
+            "dest_product_id":132603,
+            "dest_inv_id":2076206,
+            "eieo_id":105,
+            "lot":"3000239-161019000005",
+            "quantity":2,
+            "created_time":"2016-12-05 19:26:04"-->
+								<tr ng-repeat="list in indexCtrl.detaillist"  ng-click="indexCtrl.selectdetailCheckBox($index)" >
+									<td class="all-table-title"> <input type="checkbox"  class="all-checkbox"   ng-click="indexCtrl.selectdetailCheckBox($index)" ng-model="list.state"/></td>
+									<td class="all-table-title">{{list.SRCCODE}}
+										<button type="button" style="margin-left: 15px;" id="add_src" ng-click="indexCtrl.mydialog($index)" class="btn btn-info">添加</button>
+									</td>
+									<td class="all-table-title">{{list.SRCNAME}}</td>
+									<td class="all-table-title">
+										<input type="text" class="form-control" id="detail_quantity{{$index}}" ng-blur="indexCtrl.detailQuantity($index)"  placeholder="" value="{{list.quantity}}">
+									</td>
+									<td class="all-table-title">{{list.DESTCODE}}
+										<button type="button" style="margin-left: 15px;" id="add_obj" ng-click="indexCtrl.objDialog($index)" class="btn btn-info">添加</button>
+									</td>
+									<td class="all-table-title">{{list.DESTNAME}}</td>
+									<td class="all-table-title">{{list.status}}</td>
+									<td class="all-table-title">{{list.LOCNAME}}</td>
+									<td class="all-table-title">{{list.extend_prop1}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="" class="row">
+						<div class="visble-border col-xs-2 col-sm-2">
+							<select  ng-model="indexCtrl.detailselected" ng-options="x.id as x.name for x in indexCtrl.pages" ng-change="indexCtrl.packdetailChange(indexCtrl.detailselected)"></select>
+							<span>记录</span>
+					</div>
+					<div class=" col-xs-10 col-sm-10">
+						<uib-pagination total-items="indexCtrl.detailtotalitems" ng-change="indexCtrl.getDeatailAreaList()" ng-model="indexCtrl.detailcurrentpage" items-per-page="indexCtrl.detailpageSize" max-size="indexCtrl.detailmaxsize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true" boundary-link-numbers="true"></uib-pagination>
+					</div>
+				</div>
+				<div id="" class="row">
+					<div class="visble-border2 col-xs-6 col-sm-6">
+						<span>操作：{{indexCtrl.eieoSuccess}}   耗时：{{indexCtrl.eieoTime}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+
+		<!--建单操作------查询dialog------------------------------------------------>
+		<div class="modal fade" id="single_select_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width:70%;">
+				<div class="modal-content">
+					<div class="modal-header common-title-bg">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      &times;
+                </button>
+						<h4 class="modal-title" id="myModalLabel"> 查询空进空出单  </h4>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton">单号</span>
+										<input type="text" id="single_code" class="form-control" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton">状态</span>
+										<input type="text" class="form-control" id="single_status" placeholder="">
+									</div>
+
+								</div>
+								<div id="datetimepicker" class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton">创建时间</span>
+										<input data-time-icon="icon-time" id="single_create_time" date-icon="icon-calendar" class="add-on form-control" data-format="yyyy-MM-dd" type="text" readonly style="cursor:pointer;"></input>
+									</div>
+								</div>
+
+							</div>
+							<div class="row row-margintop">
+
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton">修改人</span>
+										<input type="text" class="form-control" id="single_modifier" placeholder="">
+									</div>
+								</div>
+								<div id="datetimepicker1" class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton">修改时间</span>
+										<input data-time-icon="icon-time" id="single_modif_time" date-icon="icon-calendar" class="add-on form-control" data-format="yyyy-MM-dd" type="text" readonly style="cursor:pointer;"></input>
+									</div>
+								</div>
+							</div>
+							<div class="row row-button">
+								<button type="button" id="single_query" class="btn btn-info row-width">查询</button>
+
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--明细操作------查询dialog------------------------------------------------>
+		<div class="modal fade" id="eieo_select_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width:70%;">
+				<div class="modal-content">
+					<div class="modal-header common-title-bg">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      &times;
+                </button>
+						<h4 class="modal-title" id="myModalLabel"> 查询空进空出单  </h4>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton">状态</span>
+										<input type="text" id="eieo_status" class="form-control" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton">原货品</span>
+										<input type="text" class="form-control" id="eieo_srcpro" placeholder="">
+									</div>
+
+								</div>
+								<div class="col-xs-4 col-sm-4">
+									<div class="input-group">
+										<span class="input-group-addon searchButton">目标货品</span>
+										<input type="text" class="form-control" id="eieo_objpro" placeholder="">
+									</div>
+
+								</div>
+
+							</div>
+							<div class="row row-button">
+								<button type="button" id="eieo_query" class="btn btn-info row-width">查询</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--明细添加操作dialog----------------------------------->
+		<div class="modal fade" id="detail-operate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div id="danger-dialog1" class="animated fadeInLeftBig alert alert-danger tc-dialog">
+				<strong ng-model=" indexCtrl.dangerText">警告！{{indexCtrl.dangerText}}</strong>
+			</div>
+			<div id="success-dialog1" class="animated fadeInLeftBig alert alert-success tc-dialog">
+				<strong ng-model="indexCtrl.successText">成功！{{indexCtrl.successText}}</strong>
+			</div>
+			<div class="modal-dialog" style="width:90%;">
+
+				<div class="modal-content">
+					<div class="modal-header common-title-bg">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      &times;
+                </button>
+						<h4 class="modal-title" id="myModalLabel">源货品添加</h4>
+					</div>
+
+					<div class="modal-body">
+						<div class="container-fluid animated fadeInRight">
+
+							<div class="panel panel-default content-top">
+								<div class="modal-custom-header">
+									<h3 class="modal-custom-title"><i class="fa fa-align-left"></i>查询操作</h3>
+								</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">货主</span>
+												<input id="p_ownerName" type="text" class="form-control" placeholder="">
+											</div>
+										</div>
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">供应商</span>
+												<input id="p_supplierName" type="text" class="form-control" placeholder="">
+											</div>
+										</div>
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">货品编码</span>
+												<input id="p_productCode" type="text" class="form-control" placeholder="">
+											</div>
+
+										</div>
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">69码</span>
+												<input id="p_barcode" type="text" class="form-control" placeholder="">
+											</div>
+
+										</div>
+									</div>
+									<div class="row row-margintop">
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">货品名称</span>
+												<input id="p_productName" type="text" class="form-control" placeholder="">
+											</div>
+										</div>
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">库位编码</span>
+												<input id="p_locationCode" type="text" class="form-control" placeholder="">
+											</div>
+										</div>
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">库位名称</span>
+												<select id="p_locationName" class="form-control" ng-model="indexCtrl.option_selected" ng-options="x.name as x.name for x in indexCtrl.selectStroage">
+												</select>
+											</div>
+										</div>
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">库存状态</span>
+												<select id="p_status" class="form-control">
+													<option></option>
+													<option>良品</option>
+													<option>不良品</option>
+													<option>良品冻结</option>
+													<option>不良品冻结</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row row-button">
+										<button type="button" id="p_query" class="btn btn-info row-width">查询</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="panel panel-default content-top">
+								<div class="modal-custom-header">
+									<h3 class="modal-custom-title"><i class="fa fa-align-left"></i>货品详情操作</h3>
+								</div>
+								<div class="panel-body">
+
+									<div class="row">
+										<div class="col-xs-12 col-sm-12">
+											<button type="button" id="src_srue" class="btn btn-info top-button">确定</button>
+										</div>
+									</div>
+									<div class="row table-responsive">
+										<table id="" class="table table-bordered table-hover table-distances">
+											<thead>
+												<tr>
+
+													<th class="all-table-title">
+														<input type="checkbox" id="checkAll" class="all-checkbox" ng-model="indexCtrl.productselectAll" ng-click="indexCtrl.productAll(indexCtrl.productselectAll)" />
+														<span style="font-size: 4px;vertical-align:middle;">(全选)</span	
+								     ></th>
+									<th class="all-table-title"ng-if="list.hidden==false" ng-repeat="list in indexCtrl.producttableList">
+										{{list.title}}
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+<!--{
+            "outboundCode":"-",
+            "quantityBU":14,
+            "KindName":"通讯商城",
+            "PROID":145741,
+            "inventoryAge":178,
+            "location":{
+                "warehouseArea":{
+                    "name":"A",
+                    "warehouse":{
+                        "name":"南京总仓"
+                    }
+                },
+                "name":"良品存货库位",
+                "code":"STORAGE_01"
+            },
+            "status":"GOOD",
+            "moveDocQuantityBU":0,
+            "packageLevel":{
+                "unit":"片"
+            },
+            "WAREHOUSE_CODE":"NJZC",
+            "putawayQuantityBU":0,
+            "allocatedQuantityBU":0,
+            "COL_NO":"0",
+            "warehouse":{
+                "name":"南京总仓"
+            },
+            "preAllocatedQuantityBU":0,
+            "id":4663652,
+            "productKey":{
+                "product":{
+                    "isIMEI":"0",
+                    "name":"乐2钢化玻璃膜-不分色",
+                    "owner":{
+                        "name":"我要订货网"
+                    },
+                    "brand":"其他配件品牌",
+                    "code":"51DH-dh14643376327534",
+                    "supplier":{
+                        "name":"南京市雨花台区顺和通讯产品经营部B2B-S"
+                    },
+                    "imeiLength":0
+                },
+                "lotInfo":{
+                    "extendProp3":"-",
+                    "inboundCode":"51DH-IN146579631615963",
+                    "extendProp2":"-",
+                    "storageTime":"2016-06-13 "
+                },
+                "lot":"145741-160613000001"
+            },
+            "ZONE_NO":"0",
+            "LAYER_NO":"0",
+            "quantity":14,
+            "LINE_NO":"0"-->
+								<tr ng-repeat="list in indexCtrl.productlist" ng-click="indexCtrl.selectproductCheckBox($index)">
+									<td class="all-table-title"><input type="checkbox"  class="all-checkbox"   ng-click="indexCtrl.selectproductCheckBox($index)" ng-model="list.state"/></td>
+									<td class="all-table-title">{{list.productKey.product.code}}</td>
+									<td class="all-table-title">{{list.productKey.product.name}}</td>
+									<td class="all-table-title">{{list.quantityBU}}</td>
+									<td class="all-table-title">{{list.preAllocatedQuantityBU}}</td>
+									<td class="all-table-title">{{list.location.code}}</td>
+									<td class="all-table-title">{{list.productKey.product.supplier.name}}</td>
+									<td class="all-table-title">{{list.status}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="" class="row">
+						<div class="visble-border col-xs-2 col-sm-2">
+							<select  ng-model="indexCtrl.productselected" ng-options="x.id as x.name for x in indexCtrl.pages" ng-change="indexCtrl.packprductChange(indexCtrl.productselected)"></select>
+							<span>记录</span>
+									</div>
+									<div class=" col-xs-10 col-sm-10">
+										<uib-pagination total-items="indexCtrl.producttotalitems" ng-change="indexCtrl.getproductAreaList()" ng-model="indexCtrl.productcurrentpage" items-per-page="indexCtrl.productpageSize" max-size="indexCtrl.productmaxsize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true" boundary-link-numbers="true"></uib-pagination>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="" class="row">
+						<div class="visble-border2 col-xs-6 col-sm-6">
+							<span>操作：{{indexCtrl.productSuccess}}   耗时：{{indexCtrl.productTime}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		</div>
+		<!--明细添加操作  目标货品----------------------------------->
+		<div class="modal fade" id="obj-operate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div id="danger-dialog2" class="animated fadeInLeftBig alert alert-danger tc-dialog">
+				<strong ng-model=" indexCtrl.dangerText">警告！{{indexCtrl.dangerText}}</strong>
+			</div>
+			<div id="success-dialog2" class="animated fadeInLeftBig alert alert-success tc-dialog">
+				<strong ng-model="indexCtrl.successText">成功！{{indexCtrl.successText}}</strong>
+			</div>
+			<div class="modal-dialog" style="width:90%;">
+				<div class="modal-content">
+					<div class="modal-header common-title-bg">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      &times;
+                </button>
+						<h4 class="modal-title" id="myModalLabel">目标货品添加</h4>
+					</div>
+
+					<div class="modal-body">
+						<div class="container-fluid animated fadeInRight">
+
+							<div class="panel panel-default content-top">
+								<div class="modal-custom-header">
+									<h3 class="modal-custom-title"><i class="fa fa-align-left"></i>查询操作</h3>
+								</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">货品编码</span>
+												<input id="obj_productCode" type="text" class="form-control" placeholder="">
+											</div>
+										</div>
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">货品名称</span>
+												<input id="obj_productName" type="text" class="form-control" placeholder="">
+											</div>
+										</div>
+										<div class="col-xs-3 col-sm-3">
+											<div class="input-group">
+												<span class="input-group-addon searchButton">69码</span>
+												<input id="obj_barCode" type="text" class="form-control" placeholder="">
+											</div>
+
+										</div>
+									</div>
+									<div class="row row-button">
+										<button type="button" id="obj_query" class="btn btn-info row-width">查询</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="panel panel-default content-top">
+								<div class="modal-custom-header">
+									<h3 class="modal-custom-title"><i class="fa fa-align-left"></i>货品详情操作</h3>
+								</div>
+								<div class="panel-body">
+
+									<div class="row">
+										<div class="col-xs-12 col-sm-12">
+											<button type="button" id="obj_sure" class="btn btn-info top-button">确定</button>
+										</div>
+									</div>
+									<div class="row table-responsive">
+										<table id="" class="table table-bordered table-hover table-distances">
+											<thead>
+												<tr>
+
+													<th class="all-table-title">
+														<input type="checkbox" id="checkAll" class="all-checkbox" ng-model="indexCtrl.objselectAll" ng-click="indexCtrl.objAll(indexCtrl.objselectAll)" />
+														<span style="font-size: 4px;vertical-align:middle;">(全选)</span	
+								     ></th>
+									<th class="all-table-title" ng-if="list.hidden==false" ng-repeat="list in indexCtrl.objtableList">
+										{{list.title}}
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+            <!--"shelveType":"-",
+            "ISRELATEDNO3":"0",
+            "warehouse_name":"南京总仓",
+            "ISRELATEDNO2":"0",
+            "OWNER_ID":2170,
+            "model":"",
+            "ISBARCODE":"0",
+            "owner_name":"我要订货网",
+            "WAREHOUSE_CODE":"NJZC",
+            "IMEI_LENGTH":0,
+            "KIND_ID":2501,
+            "SUPPLIER_ID":4192,
+            "creator":"51DH",
+            "id":3000239,
+            "baseUnit":"个",
+            "LOT_RULE_ID":2081,
+            "description":"",
+            "validiteTime":0,
+            "name":"三角牌电磁炉PX-B1T 配汤锅-黑",
+            "barCode":"-",
+            "lastOperator":"卢其兵",
+            "isIMEI":"0",
+            "createdTime":"2016-10-12 17:20:16",
+            "status":"ENABLED",
+            "supplier_name":"(LJM)上海吉平通讯设备有限公司",
+            "code":"51DH-dh14762640165375",
+            "um":"0",
+            "isRelatedNo1":"0",
+            "RELATED_NO_LENGTH1":0,
+            "RELATED_NO_LENGTH2":0,
+            "RELATED_NO_LENGTH3":0,
+            "lot_rule_name":"默认批次规则",
+            "color":"黑",
+            "brand":"三角",
+            "lastOperatedTime":"2016-11-09 18:16:21",
+            "abcType":"-",
+            "kind_name":"IT家电生活馆",
+            "pickType":"-"-->
+								<tr ng-repeat="list in indexCtrl.objlist"   ng-click="indexCtrl.selectobjCheckBox($index)">
+									<td class="all-table-title"><input type="checkbox"  class="all-checkbox"   ng-click="indexCtrl.selectobjCheckBox($index)" ng-model="list.state"/></td>
+									<td class="all-table-title">{{list.owner_name}}</td>
+									<td class="all-table-title">{{list.code}}</td>
+									<td class="all-table-title">{{list.name}}</td>
+									<td class="all-table-title">{{list.supplier_name}}</td>
+									<td class="all-table-title">{{list.kind_name}}</td>
+									<td class="all-table-title">{{list.brand}}</td>
+									<td class="all-table-title">{{list.color}}</td>
+									<td class="all-table-title">{{list.barCode}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="" class="row">
+						<div class="visble-border col-xs-2 col-sm-2">
+							<select  ng-model="indexCtrl.objselected" ng-options="x.id as x.name for x in indexCtrl.pages" ng-change="indexCtrl.packobjChange(indexCtrl.objselected)"></select>
+							<span>记录</span>
+									</div>
+									<div class="col-xs-10 col-sm-10">
+										<uib-pagination total-items="indexCtrl.objtotalitems" ng-change="indexCtrl.getobjAreaList()" ng-model="indexCtrl.objcurrentpage" items-per-page="indexCtrl.objpageSize" max-size="indexCtrl.objmaxsize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true" boundary-link-numbers="true"></uib-pagination>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="" class="row">
+						<div class="visble-border2 col-xs-6 col-sm-6">
+							<span>操作：{{indexCtrl.objSuccess}}   耗时：{{indexCtrl.objTime}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+					<button type="button" class="btn btn-primary" onclick="submitcustom()">
+                    提交
+                </button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		</div>
+		<!-- /.modal -->
+		<script type="text/javascript" src="../../../COMMON/js/jquery/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../../../COMMON/js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../../COMMON/js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
+		<script type="text/javascript" src="../../../COMMON/js/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../../COMMON/js/bootstrap/bootstrap-table.js"></script>
+		<script type="text/javascript" src="../../../COMMON/js/app.js"></script>
+		<script src="../../js/config.js"></script>
+		<script src="../../../COMMON/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="../../js/controller/eoei.controller.js"></script>
+		<script type="text/javascript" src="../../js/service/eoei.service.js"></script>
+
+	</body>
+
+</html>

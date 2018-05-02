@@ -1,0 +1,11 @@
+{
+    "packageBoxQuantity": 3,
+    "weight": 3,
+    "volume": 0.03,
+    "packageStatus": "WORKING",
+    "additionalMsg": {
+        "message": "",
+        "status": "成功",
+        "processTime": 0.064
+    }
+}

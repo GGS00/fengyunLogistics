@@ -1,0 +1,13 @@
+{
+    "total": 10,
+    "rows": [
+        {
+            "name": "顺丰",
+            "code": "shunfeng"
+        },
+        {
+            "name": "中通",
+            "code": "zhongtong"
+        }
+    ]
+}

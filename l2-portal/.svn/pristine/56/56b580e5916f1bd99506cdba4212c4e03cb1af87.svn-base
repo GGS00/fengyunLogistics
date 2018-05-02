@@ -1,0 +1,1149 @@
+{
+    "total": 96,
+    "rows": [
+        {
+            "packageBoxQuantity": 2,
+            "outboundCode": "OUT_51DH_161118000006",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 3,
+            "expectedCheckQuantityBU": 0,
+            "status": "WORKING",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_51DH_161118000006-07",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-11-18 16:43:53",
+                "lastOperatedTime": "2016-11-18 16:44:34",
+                "lastOperator": "卢其兵",
+                "creator": "卢其兵"
+            },
+            "waybillCode": "025003086954",
+            "id": 2002092,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2003677,
+            "checkStatus": "NON_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0.02,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "SUN_20161117170724",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 4,
+            "status": "FINISHED",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 6,
+            "pickedQuantityBU": 6,
+            "code": "PT_SUN_20161117170724-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-11-18 13:39:14",
+                "creator": "孙权"
+            },
+            "waybillCode": "025003012640",
+            "id": 2002086,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 6,
+            "outboundId": 2003669,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_161009000001",
+            "billType": {
+                "id": 2000120
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 0,
+            "status": "FINISHED",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 0,
+            "pickedQuantityBU": 0,
+            "code": "PT_OUT_51DH_161009000001-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-10-09 15:08:28",
+                "creator": "李超"
+            },
+            "waybillCode": "025010103450",
+            "id": 2001054,
+            "project": {
+                "id": 2000140
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2002607,
+            "checkStatus": "NON_CHECK",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            }
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_SUN_20160927102352",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "FINISHED",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 6,
+            "pickedQuantityBU": 6,
+            "code": "PT_OUT_SUN_20160927102352-02",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-09-27 10:28:23",
+                "creator": "周杰"
+            },
+            "waybillCode": "025010103423",
+            "id": 2001035,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 6,
+            "outboundId": 2001993,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_SUN_20160926112105",
+            "billType": {
+                "id": 2000120
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 0,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 0,
+            "pickedQuantityBU": 0,
+            "code": "PT_OUT_SUN_20160926112105-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-09-26 15:09:53",
+                "creator": "周杰"
+            },
+            "waybillCode": "025010103421",
+            "id": 2001032,
+            "project": {
+                "id": 2000140
+            },
+            "expectedQuantityBU": 6,
+            "outboundId": 2001986,
+            "checkStatus": "NON_CHECK",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            }
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_SUN_20160926112106",
+            "billType": {
+                "id": 2000120
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 0,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 0,
+            "pickedQuantityBU": 0,
+            "code": "PT_OUT_SUN_20160926112106-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-09-26 15:09:27",
+                "creator": "周杰"
+            },
+            "waybillCode": "025010103420",
+            "id": 2001031,
+            "project": {
+                "id": 2000140
+            },
+            "expectedQuantityBU": 6,
+            "outboundId": 2001987,
+            "checkStatus": "NON_CHECK",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            }
+        },
+        {
+            "packageBoxQuantity": 2,
+            "outboundCode": "OUT_SUN_20160926112058",
+            "billType": {
+                "id": 2000120
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 12,
+            "expectedCheckQuantityBU": 0,
+            "status": "WORKING",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 0,
+            "pickedQuantityBU": 0,
+            "code": "PT_OUT_SUN_20160926112058-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-09-26 13:58:26",
+                "lastOperatedTime": "2016-10-19 19:32:08",
+                "lastOperator": "小春测试",
+                "creator": "周杰"
+            },
+            "waybillCode": "025010103406",
+            "id": 2001030,
+            "project": {
+                "id": 2000140
+            },
+            "expectedQuantityBU": 6,
+            "outboundId": 2001988,
+            "checkStatus": "NON_CHECK",
+            "volume": 0.02,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            }
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160909000009",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 1,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_51DH_160909000009-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-09-09 16:54:41",
+                "creator": "小春测试"
+            },
+            "waybillCode": "025010103412",
+            "id": 2000990,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2001875,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160829000008",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160829000008-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-29 15:02:55",
+                "creator": "XM"
+            },
+            "waybillCode": "025010146678",
+            "id": 2000949,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001678,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160829000006",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160829000006-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-29 14:49:50",
+                "creator": "XM"
+            },
+            "waybillCode": "025010234206",
+            "id": 2000948,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001676,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160825000004",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "WORKING",
+            "checkedQuantityBU": 1,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160825000004-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-26 10:19:28",
+                "lastOperatedTime": "2016-09-21 09:41:26",
+                "lastOperator": "周杰",
+                "creator": "XM"
+            },
+            "waybillCode": "025010178182",
+            "id": 2000943,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001665,
+            "checkStatus": "PART_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160826000001",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 3,
+            "pickedQuantityBU": 3,
+            "code": "PT_OUT_51DH_160826000001-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-26 09:34:09",
+                "creator": "XM"
+            },
+            "waybillCode": "025010229324",
+            "id": 2000942,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 3,
+            "outboundId": 2001666,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160825000002",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "WORKING",
+            "checkedQuantityBU": 2,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160825000002-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-25 11:08:49",
+                "lastOperatedTime": "2016-08-25 11:10:54",
+                "lastOperator": "小春测试",
+                "creator": "XM"
+            },
+            "waybillCode": "025010225960",
+            "id": 2000939,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001661,
+            "checkStatus": "CHECKED",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160825000001",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "WORKING",
+            "checkedQuantityBU": 2,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160825000001-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-25 10:01:02",
+                "lastOperatedTime": "2016-08-25 10:40:05",
+                "lastOperator": "小春测试",
+                "creator": "XM"
+            },
+            "waybillCode": "025010173651",
+            "id": 2000938,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001659,
+            "checkStatus": "CHECKED",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160824000003",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160824000003-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-24 16:02:00",
+                "creator": "XM"
+            },
+            "waybillCode": "025010128529",
+            "id": 2000937,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001657,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160824000001",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "WORKING",
+            "checkedQuantityBU": 2,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160824000001-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-24 10:53:35",
+                "lastOperatedTime": "2016-08-24 14:18:35",
+                "lastOperator": "小春测试",
+                "creator": "XM"
+            },
+            "waybillCode": "025010134579",
+            "id": 2000936,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001655,
+            "checkStatus": "CHECKED",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160823000003",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 1,
+            "status": "WORKING",
+            "checkedQuantityBU": 1,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_51DH_160823000003-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-23 16:24:15",
+                "lastOperatedTime": "2016-08-23 17:28:28",
+                "lastOperator": "小春测试",
+                "creator": "XM"
+            },
+            "waybillCode": "025010209378",
+            "id": 2000935,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2001654,
+            "checkStatus": "CHECKED",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160823000002",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160823000002-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-23 15:05:19",
+                "creator": "XM"
+            },
+            "waybillCode": "025010173402",
+            "id": 2000934,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001653,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160823000001",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 1,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_51DH_160823000001-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-23 14:59:37",
+                "creator": "XM"
+            },
+            "waybillCode": "025010157206",
+            "id": 2000933,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2001652,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160822000006",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 1,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_51DH_160822000006-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-22 16:56:20",
+                "creator": "XM"
+            },
+            "waybillCode": "025010139580",
+            "id": 2000932,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2001648,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160822000007",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160822000007-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-22 16:34:26",
+                "creator": "XM"
+            },
+            "waybillCode": "025010199940",
+            "id": 2000931,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001649,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160822000005",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 2,
+            "pickedQuantityBU": 2,
+            "code": "PT_OUT_51DH_160822000005-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-22 15:58:44",
+                "creator": "XM"
+            },
+            "waybillCode": "025010153487",
+            "id": 2000930,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 2,
+            "outboundId": 2001647,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160822000004",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 1,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_51DH_160822000004-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-22 15:50:06",
+                "creator": "XM"
+            },
+            "waybillCode": "025010131032",
+            "id": 2000929,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2001646,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160822000003",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 1,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_51DH_160822000003-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-22 13:34:30",
+                "creator": "XM"
+            },
+            "waybillCode": "025010130369",
+            "id": 2000928,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2001645,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160822000002",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 1,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_51DH_160822000002-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-22 10:50:28",
+                "creator": "XM"
+            },
+            "waybillCode": "025010216302",
+            "id": 2000927,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2001644,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_FXDHH_160812000001",
+            "billType": {
+                "id": 2643
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 1,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_FXDHH_160812000001-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-12 23:04:41",
+                "creator": "XM"
+            },
+            "waybillCode": "025010112357",
+            "id": 2000902,
+            "project": {
+                "id": 2274
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2001617,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2390,
+                "name": "蜂星订货会"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160808000001",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 4,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 4,
+            "pickedQuantityBU": 4,
+            "code": "PT_OUT_51DH_160808000001_01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-08 09:27:54",
+                "creator": "周杰"
+            },
+            "waybillCode": "025010214261",
+            "id": 2000891,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 4,
+            "outboundId": 2001593,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 1,
+            "outboundCode": "OUT_51DH_160805000007",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 2,
+            "expectedCheckQuantityBU": 0,
+            "status": "WORKING",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 1,
+            "pickedQuantityBU": 1,
+            "code": "PT_OUT_51DH_160805000007-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-05 16:31:58",
+                "lastOperatedTime": "2016-09-23 13:12:13",
+                "lastOperator": "小春测试",
+                "creator": "XM"
+            },
+            "waybillCode": "025010237650",
+            "id": 2000890,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 1,
+            "outboundId": 2001592,
+            "checkStatus": "NON_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0.27,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        },
+        {
+            "packageBoxQuantity": 0,
+            "outboundCode": "OUT_51DH_160801000009",
+            "billType": {
+                "id": 2301
+            },
+            "shipStatus": "UN_SHIP",
+            "weight": 0,
+            "expectedCheckQuantityBU": 2,
+            "status": "OPEN",
+            "checkedQuantityBU": 0,
+            "allocatedQuantityBU": 4,
+            "pickedQuantityBU": 4,
+            "code": "PT_OUT_51DH_160801000009-01",
+            "warehouse": {
+                "id": 2184
+            },
+            "type": "NORMAL",
+            "shipQuantityBU": 0,
+            "info": {
+                "createdTime": "2016-08-01 13:15:02",
+                "creator": "XM"
+            },
+            "waybillCode": "025010104679",
+            "id": 2000874,
+            "project": {
+                "id": 2152
+            },
+            "expectedQuantityBU": 4,
+            "outboundId": 2001546,
+            "checkStatus": "UN_CHECK",
+            "billTypeName": "销售出库单",
+            "volume": 0,
+            "owner": {
+                "id": 2170,
+                "name": "我要订货网"
+            },
+            "projectName": "DEFAULT"
+        }
+    ],
+    "additionalMsg": {
+        "message": "",
+        "status": "成功",
+        "processTime": 10.673
+    }
+}
